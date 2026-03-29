@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screener Value Europe — 28/03/2026</title>
+<style>
+:root{--bg:#f8f8f6;--sur:#fff;--sur2:#f3f2ef;--bdr:#e2e0da;--bdr2:#ccc9c0;--tx:#1a1a18;--tx2:#5a5a54;--tx3:#9a9a90;--acc:#1a56a0;--acc-bg:#e8f0fb;--grn:#1a6b3a;--grn-bg:#e6f4ec;--amb:#8a5a00;--amb-bg:#fef3d8;--red:#9a2020;--red-bg:#fdecea;--pur:#5a2a9a;--pur-bg:#f0eafa;--teal:#0a6b6b;--teal-bg:#e0f4f4;--ora:#b04000;--ora-bg:#fff0e0}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;overflow:hidden}
+body{font-family:Arial,sans-serif;font-size:13px;background:var(--bg);color:var(--tx);display:flex;flex-direction:column}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;gap:12px;padding:9px 18px;background:var(--sur);border-bottom:1px solid var(--bdr);flex-shrink:0}
+.logo{font-size:15px;font-weight:700}.logo span{color:var(--tx3);font-weight:400}
+.dtag{font-size:11px;color:var(--tx3);background:var(--sur2);border:1px solid var(--bdr);padding:3px 9px;border-radius:20px}
+.ctag{font-size:12px;font-weight:700;color:var(--acc)}
+.tbr{margin-left:auto}.rst{font-size:12px;padding:5px 13px;border-radius:8px;border:1px solid var(--bdr2);background:var(--sur);cursor:pointer;color:var(--tx2)}
+.rst:hover{background:var(--sur2)}
+
+/* LAYOUT */
+.app{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR */
+.sb{width:272px;min-width:272px;background:var(--sur);border-right:1px solid var(--bdr);overflow-y:auto;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:4px}.sb::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
+.sec{padding:11px 15px;border-bottom:1px solid var(--bdr)}
+.stl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:9px}
+
+/* Weight rows */
+.wr{display:flex;align-items:center;gap:7px;margin-bottom:8px}.wr:last-child{margin-bottom:0}
+.wc{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;min-width:40px;text-align:center;flex-shrink:0}
+.wc.va{background:var(--acc-bg);color:var(--acc)}.wc.qu{background:var(--pur-bg);color:var(--pur)}.wc.di{background:var(--grn-bg);color:var(--grn)}.wc.pe{background:var(--amb-bg);color:var(--amb)}.wc.mo6{background:#fff0e0;color:#c05000;border:1px solid #f0c080}.wc.mo1{background:#f0fff0;color:#1a6b3a;border:1px solid #a0d0a0}
+.wl{font-size:12px;color:var(--tx2);flex:1}.wv{font-size:12px;font-weight:700;color:var(--acc);min-width:20px;text-align:right}
+input[type=range]{accent-color:var(--acc);cursor:pointer}
+
+/* Filter rows */
+.fr{display:flex;align-items:center;gap:7px;margin-bottom:7px}.fr:last-child{margin-bottom:0}
+.fl{font-size:11px;color:var(--tx2);flex:1}.fv{font-size:11px;font-weight:700;min-width:46px;text-align:right;color:var(--tx)}.fv.on{color:var(--acc)}
+
+/* Section headers with color */
+.sec-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.sec-dot{width:8px;height:8px;border-radius:50%}
+
+/* Country toggles */
+.tg-w{display:flex;flex-wrap:wrap;gap:4px}
+.tg{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid var(--bdr2);cursor:pointer;background:var(--sur);color:var(--tx2);user-select:none;transition:.1s}
+.tg:hover{background:var(--sur2)}.tg.on{background:var(--acc);border-color:var(--acc);color:#fff}
+
+/* Sort buttons */
+.sg{display:flex;flex-wrap:wrap;gap:4px}
+.sb2{font-size:11px;padding:3px 9px;border-radius:7px;border:1px solid var(--bdr2);cursor:pointer;background:var(--sur);color:var(--tx2);transition:.1s}
+.sb2.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700}
+
+/* MAIN TABLE */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.tw{flex:1;overflow:auto}
+.tw::-webkit-scrollbar{width:5px;height:5px}.tw::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead{position:sticky;top:0;z-index:10}
+th{background:var(--sur2);padding:7px 9px;text-align:left;font-weight:700;font-size:11px;color:var(--tx2);border-bottom:1px solid var(--bdr);white-space:nowrap;cursor:pointer;user-select:none}
+th:hover{background:var(--bdr)}.thon{color:var(--acc)!important}
+td{padding:6px 9px;border-bottom:1px solid var(--bdr);vertical-align:middle;white-space:nowrap;color:var(--tx2)}
+.nt{color:var(--tx);font-weight:600;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+tr{cursor:pointer}tr:hover td{background:var(--acc-bg)}tr.sel td{background:#dceeff}
+
+/* Score badge */
+.sbd{display:inline-flex;align-items:center;gap:5px}
+.sn{font-weight:700;font-size:12px;min-width:34px}
+.str{width:50px;height:4px;border-radius:2px;background:var(--sur2);overflow:hidden}.sf{height:100%;border-radius:2px}
+.sa{color:var(--grn)}.sfa{background:var(--grn)}
+.sb4{color:var(--amb)}.sfb{background:var(--amb)}
+.sc2{color:var(--red)}.sfc{background:var(--red)}
+
+/* Value coloring */
+.vg{color:var(--grn);font-weight:700}.vo{color:var(--amb);font-weight:600}.vr{color:var(--red)}
+
+/* Country pill */
+.cp{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:var(--sur2);color:var(--tx2);border:1px solid var(--bdr)}
+.pp{color:var(--grn)}.pn{color:var(--red)}
+
+/* Rank pills */
+.rp{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px}
+.rpg{background:var(--grn-bg);color:var(--grn)}.rpo{background:var(--amb-bg);color:var(--amb)}.rpr{background:var(--red-bg);color:var(--red)}
+.rpp{background:var(--pur-bg);color:var(--pur)}.rpt{background:var(--teal-bg);color:var(--teal)}.rpm{background:var(--ora-bg);color:var(--ora)}
+
+/* DETAIL PANEL */
+.det{width:295px;min-width:295px;background:var(--sur);border-left:1px solid var(--bdr);overflow-y:auto;display:none;flex-direction:column}
+.det.open{display:flex}.det::-webkit-scrollbar{width:4px}.det::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
+.dh{padding:13px 15px;border-bottom:1px solid var(--bdr);position:relative}
+.dtk{font-size:11px;font-weight:700;color:var(--acc);margin-bottom:2px}
+.dnm{font-size:13px;font-weight:700;color:var(--tx);line-height:1.3}.dsb{font-size:11px;color:var(--tx3);margin-top:3px}
+.dcl{position:absolute;top:11px;right:11px;cursor:pointer;font-size:17px;color:var(--tx3);width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:5px}
+.dcl:hover{background:var(--sur2);color:var(--tx)}
+
+/* Score display */
+.dsc{padding:11px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:12px}
+.dci{width:54px;height:54px;border-radius:50%;border:2.5px solid var(--acc);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.dcp{font-size:17px;font-weight:700;color:var(--acc);line-height:1}.dcl2{font-size:9px;color:var(--tx3)}
+.dbr{flex:1}
+.dbr-r{display:flex;align-items:center;gap:5px;margin-bottom:4px}.dbr-r:last-child{margin-bottom:0}
+.dbl{font-size:9px;min-width:32px;font-weight:700;text-align:right}
+.dbt{flex:1;height:4px;border-radius:2px;background:var(--sur2);overflow:hidden}.dbf{height:100%;border-radius:2px}
+.dbn{font-size:9px;color:var(--tx3);min-width:26px;text-align:right}
+
+/* Detail sections */
+.ds{padding:9px 15px;border-bottom:1px solid var(--bdr)}
+.dst{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.dr{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--bdr)}.dr:last-child{border-bottom:none}
+.dl{font-size:11px;color:var(--tx2)}.dv{font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px}
+.drk{font-size:10px;color:var(--tx3);font-weight:400}
+.nr{padding:40px 20px;text-align:center;color:var(--tx3);font-size:14px}
+
+/* WATCHLIST */
+.wl-btn{background:none;border:none;cursor:pointer;font-size:15px;padding:2px 4px;line-height:1;color:var(--tx3);transition:.15s;flex-shrink:0}
+.wl-btn:hover{color:#e8a800;transform:scale(1.2)}
+.wl-btn.wl-on{color:#e8a800}
+.wl-tab{display:flex;gap:0;border-bottom:2px solid var(--bdr);flex-shrink:0;padding:0 12px;background:var(--sur)}
+.wl-tab-btn{font-size:12px;font-weight:600;padding:7px 14px;border:none;background:none;cursor:pointer;color:var(--tx3);border-bottom:2px solid transparent;margin-bottom:-2px;transition:.1s}
+.wl-tab-btn.active{color:var(--acc);border-bottom-color:var(--acc)}
+.wl-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--acc);color:#fff;font-size:9px;font-weight:700;border-radius:20px;padding:1px 5px;margin-left:5px;min-width:16px}
+.wl-badge.hidden{display:none}
+
+/* Comment zone in detail panel */
+.d-comment{padding:9px 15px;border-bottom:1px solid var(--bdr)}
+.d-comment .dst{margin-bottom:5px}
+.d-comment-ta{width:100%;min-height:64px;resize:vertical;font-size:12px;font-family:inherit;border:1px solid var(--bdr2);border-radius:6px;padding:6px 8px;color:var(--tx);background:var(--sur2);outline:none;transition:.15s}
+.d-comment-ta:focus{border-color:var(--acc);background:var(--sur)}
+.d-comment-save{margin-top:5px;font-size:11px;padding:3px 12px;border-radius:6px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer;transition:.1s}
+.d-comment-save:hover{opacity:.85}
+.d-comment-saved{font-size:10px;color:var(--grn);margin-left:7px;display:none}
+
+/* Watchlist panel in table */
+.wl-empty{padding:40px 20px;text-align:center;color:var(--tx3);font-size:13px;line-height:1.6}
+.wl-note-cell{max-width:200px;overflow:hidden;text-overflow:ellipsis;font-style:italic;color:var(--tx3);font-size:11px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">Screener Value <span>Europe</span></div>
+  <div class="dtag">28 mars 2026 · TradingView</div>
+  <div class="ctag" id="ctag">— actions</div>
+  <div class="tbr" style="display:flex;align-items:center;gap:8px">
+    <button class="rst" id="wl-topbtn" onclick="toggleView()" style="display:flex;align-items:center;gap:5px;font-weight:600;color:var(--tx2)">
+      ★ Watchlist <span class="wl-badge hidden" id="wl-count-badge">0</span>
+    </button>
+    <button class="rst" onclick="doReset()">↺ Réinitialiser</button>
+  </div>
+</div>
+
+<div class="app">
+<div class="sb">
+
+  <!-- PONDÉRATION -->
+  <div class="sec">
+    <div class="stl">Pondération score</div>
+    <div class="wr"><span class="wc va">VALO</span><span class="wl">Valorisation</span><input type="range" id="w-valo" min="0" max="5" value="3" step="1" style="width:65px"><span class="wv" id="w-valo-v">×3</span></div>
+    <div class="wr"><span class="wc qu">QUAL</span><span class="wl">Qualité (ROE+ROIC)</span><input type="range" id="w-qual" min="0" max="5" value="2" step="1" style="width:65px"><span class="wv" id="w-qual-v">×2</span></div>
+    <div class="wr"><span class="wc di">DIV</span><span class="wl">Dividende</span><input type="range" id="w-div" min="0" max="5" value="1" step="1" style="width:65px"><span class="wv" id="w-div-v">×1</span></div>
+    <div class="wr"><span class="wc mo6">MOM6</span><span class="wl">Momentum 6 mois</span><input type="range" id="w-mom6" min="0" max="5" value="1" step="1" style="width:65px"><span class="wv" id="w-mom6-v">×1</span></div>
+    <div class="wr"><span class="wc mo1">MOM1</span><span class="wl">Momentum 1 mois</span><input type="range" id="w-mom1" min="0" max="5" value="0" step="1" style="width:65px"><span class="wv" id="w-mom1-v">×0</span></div>
+  </div>
+
+  <!-- FILTRES VALORISATION -->
+  <div class="sec">
+    <div class="stl" style="color:var(--acc)">▸ Valorisation</div>
+    <div class="fr"><span class="fl">PER max</span><input type="range" id="f-pe" min="1" max="15" value="15" step="0.5" style="width:65px"><span class="fv" id="f-pe-v">≤ 15x</span></div>
+    <div class="fr"><span class="fl">EV/EBITDA max</span><input type="range" id="f-ev" min="1" max="30" value="30" step="0.5" style="width:65px"><span class="fv" id="f-ev-v">—</span></div>
+    <div class="fr"><span class="fl">P/B max</span><input type="range" id="f-pb" min="0.1" max="5" value="5" step="0.1" style="width:65px"><span class="fv" id="f-pb-v">—</span></div>
+    <div class="fr"><span class="fl">P/S max</span><input type="range" id="f-ps" min="0.1" max="3" value="3" step="0.1" style="width:65px"><span class="fv" id="f-ps-v">—</span></div>
+    <div class="fr"><span class="fl">P/OCF max</span><input type="range" id="f-ocf" min="1" max="15" value="15" step="0.5" style="width:65px"><span class="fv" id="f-ocf-v">—</span></div>
+  </div>
+
+  <!-- FILTRES QUALITÉ -->
+  <div class="sec">
+    <div class="stl" style="color:var(--pur)">▸ Qualité</div>
+    <div class="fr"><span class="fl">ROE min (%)</span><input type="range" id="f-roe" min="0" max="40" value="0" step="1" style="width:65px"><span class="fv" id="f-roe-v">—</span></div>
+    <div class="fr"><span class="fl">ROIC min (%)</span><input type="range" id="f-roic" min="0" max="30" value="0" step="1" style="width:65px"><span class="fv" id="f-roic-v">—</span></div>
+  </div>
+
+  <!-- FILTRES DIVIDENDE -->
+  <div class="sec">
+    <div class="stl" style="color:var(--grn)">▸ Dividende</div>
+    <div class="fr"><span class="fl">Div. yield min (%)</span><input type="range" id="f-div" min="0" max="12" value="0" step="0.5" style="width:65px"><span class="fv" id="f-div-v">—</span></div>
+  </div>
+
+  <!-- FILTRES MOMENTUM -->
+  <div class="sec">
+    <div class="stl" style="color:var(--ora)">▸ Momentum</div>
+    <div class="fr"><span class="fl">Mom. 6m min (%)</span><input type="range" id="f-mom6" min="-50" max="50" value="-50" step="1" style="width:65px"><span class="fv" id="f-mom6-v">—</span></div>
+    <div class="fr"><span class="fl">Mom. 1m min (%)</span><input type="range" id="f-mom1" min="-30" max="30" value="-30" step="1" style="width:65px"><span class="fv" id="f-mom1-v">—</span></div>
+  </div>
+
+  <!-- CAP MIN -->
+  <div class="sec">
+    <div class="stl">Capitalisation</div>
+    <div class="fr"><span class="fl">Cap. min (M€)</span><input type="range" id="f-mc" min="50" max="5000" value="50" step="50" style="width:65px"><span class="fv on" id="f-mc-v">50M</span></div>
+  </div>
+
+  <!-- PAYS -->
+  <div class="sec">
+    <div class="stl">Pays</div>
+    <div class="tg-w" id="tgs">
+      <span class="tg on" data-v="ALL">Tous</span>
+      <span class="tg" data-v="FR">🇫🇷 FR</span>
+      <span class="tg" data-v="DE">🇩🇪 DE</span>
+      <span class="tg" data-v="IT">🇮🇹 IT</span>
+      <span class="tg" data-v="ES">🇪🇸 ES</span>
+      <span class="tg" data-v="BE">🇧🇪 BE</span>
+      <span class="tg" data-v="NL">🇳🇱 NL</span>
+      <span class="tg" data-v="NO">🇳🇴 NO</span>
+    </div>
+  </div>
+
+  <!-- TRI -->
+  <div class="sec">
+    <div class="stl">Tri</div>
+    <div class="sg">
+      <button class="sb2 on" data-s="score">Score</button>
+      <button class="sb2" data-s="pe">PER</button>
+      <button class="sb2" data-s="ev">EV/EBITDA</button>
+      <button class="sb2" data-s="roe">ROE</button>
+      <button class="sb2" data-s="roic">ROIC</button>
+      <button class="sb2" data-s="div">Div%</button>
+      <button class="sb2" data-s="pb">P/B</button>
+      <button class="sb2" data-s="mc">Cap.</button>
+      <button class="sb2" data-s="mom6">Mom.6m</button>
+      <button class="sb2" data-s="mom1">Mom.1m</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- TABLE -->
+<div class="main">
+  <div class="tw">
+    <table>
+      <thead><tr>
+        <th style="width:28px">#</th>
+        <th style="width:28px" title="Watchlist">★</th>
+        <th id="th-sc" class="thon">Score</th>
+        <th>Ticker</th>
+        <th>Société</th>
+        <th>Pays</th>
+        <th id="th-mc">Cap M€</th>
+        <th id="th-pe">PER</th>
+        <th id="th-ev">EV/EBITDA</th>
+        <th id="th-pb">P/B</th>
+        <th id="th-ps">P/S</th>
+        <th id="th-roe" style="border-left:2px solid var(--pur-bg)">ROE%</th>
+        <th id="th-roic">ROIC%</th>
+        <th id="th-div" style="border-left:2px solid var(--grn-bg)">Div%</th>
+        <th id="th-pf">Perf 1A</th>
+        <th id="th-mom6" style="border-left:2px solid #fff0e0">Mom.6m</th>
+        <th id="th-mom1">Mom.1m</th>
+        <th>Valo</th>
+        <th>Qual.</th>
+        <th>Div.</th>
+        <th>Mom.</th>
+        <th id="th-note" style="display:none">Note</th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
+    </table>
+    <div id="nr" class="nr" style="display:none">Aucune action ne correspond aux critères.</div>
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="det" id="det">
+  <div class="dh">
+    <div class="dtk" id="d-tk"></div>
+    <div class="dnm" id="d-nm"></div>
+    <div class="dsb" id="d-sb"></div>
+    <div class="dcl" onclick="closeD()">✕</div>
+  </div>
+  <div class="dsc">
+    <div class="dci"><div class="dcp" id="d-pct">—</div><div class="dcl2">score</div></div>
+    <div class="dbr" id="d-bars"></div>
+  </div>
+  <div class="ds">
+    <div class="dst"><span style="width:8px;height:8px;border-radius:50%;background:var(--acc);flex-shrink:0;display:inline-block"></span><span style="color:var(--acc)">Valorisation</span></div>
+    <div id="d-valo"></div>
+  </div>
+  <div class="ds">
+    <div class="dst"><span style="width:8px;height:8px;border-radius:50%;background:var(--pur);flex-shrink:0;display:inline-block"></span><span style="color:var(--pur)">Qualité</span></div>
+    <div id="d-qual"></div>
+  </div>
+  <div class="ds">
+    <div class="dst"><span style="width:8px;height:8px;border-radius:50%;background:var(--grn);flex-shrink:0;display:inline-block"></span><span style="color:var(--grn)">Dividende</span></div>
+    <div id="d-div"></div>
+  </div>
+  <div class="ds">
+    <div class="dst"><span style="color:var(--tx3)">Performance &amp; multiples</span></div>
+    <div id="d-misc"></div>
+  </div>
+  <div class="d-comment">
+    <div class="dst"><span style="color:var(--tx3)">💬 Commentaire</span></div>
+    <textarea class="d-comment-ta" id="d-comment-ta" placeholder="Ajouter une note personnelle…"></textarea>
+    <div style="display:flex;align-items:center;margin-top:5px">
+      <button class="d-comment-save" onclick="saveComment()">Enregistrer</button>
+      <span class="d-comment-saved" id="d-comment-saved">✓ Enregistré</span>
+    </div>
+  </div>
+  <div style="padding:11px 15px">
+    <button onclick="toggleWatchlist(selTk)" id="d-wl-btn" style="width:100%;padding:7px;border-radius:8px;border:1.5px solid var(--bdr2);background:var(--sur2);cursor:pointer;font-size:13px;font-weight:600;color:var(--tx2);transition:.15s">☆ Ajouter à la watchlist</button>
+  </div>
+</div>
+</div>
+
+<script>
+const DATA=[
+{ticker:"TTE",company:"TotalEnergies SE",country:"FR",mc:167884.7,pe:14.976,ev_ebitda:6.476,p_ocf:7.055,ps:1.064,pb:1.719,ev_ebit:10.56,ev_rev:1.218,perf_1y:32.641,roe:11.036,roic:7.907,div:4.255,mom6:36.404,mom1:16.737},
+{ticker:"VK",company:"Vallourec SA",country:"FR",mc:4970.8,pe:14.944,ev_ebitda:6.55,p_ocf:9.526,ps:1.412,pb:2.191,ev_ebit:8.81,ev_rev:1.319,perf_1y:11.994,roe:14.72,roic:10.63,div:7.072,mom6:23.411,mom1:4.314},
+{ticker:"DG",company:"VINCI SA",country:"FR",mc:70383.9,pe:14.584,ev_ebitda:7.142,p_ocf:6.012,ps:0.956,pb:2.28,ev_ebit:10.467,ev_rev:1.255,perf_1y:6.718,roe:16.155,roic:7.918,div:3.767,mom6:8.96,mom1:-9.617},
+{ticker:"NEX",company:"Nexans SA",country:"FR",mc:4984.0,pe:14.565,ev_ebitda:7.349,p_ocf:6.665,ps:0.648,pb:2.489,ev_ebit:11.38,ev_rev:0.675,perf_1y:15.751,roe:11.187,roic:5.913,div:2.281,mom6:-9.191,mom1:-5.94},
+{ticker:"ALFLE",company:"Fleury Michon SA",country:"FR",mc:94.9,pe:14.416,ev_ebitda:2.638,p_ocf:3.649,ps:0.117,pb:0.481,ev_ebit:22.997,ev_rev:0.138,perf_1y:1.778,roe:2.96,roic:1.696,div:5.859,mom6:-5.761,mom1:-6.911},
+{ticker:"TFF",company:"TFF Group",country:"FR",mc:332.7,pe:14.263,ev_ebitda:10.67,p_ocf:9.219,ps:0.888,pb:0.685,ev_ebit:15.41,ev_rev:1.817,perf_1y:-37.903,roe:4.741,roic:3.831,div:3.257,mom6:-7.784,mom1:-15.616},
+{ticker:"ALCIS",company:"Catering International Services",country:"FR",mc:103.7,pe:14.195,ev_ebitda:3.04,p_ocf:6.107,ps:0.224,pb:1.593,ev_ebit:4.688,ev_rev:0.224,perf_1y:45.514,roe:11.359,roic:8.311,div:1.321,mom6:10.833,mom1:-5.0},
+{ticker:"EQS",company:"Equasens SA",country:"FR",mc:513.7,pe:14.16,ev_ebitda:8.009,p_ocf:9.629,ps:2.274,pb:2.235,ev_ebit:10.89,ev_rev:2.182,perf_1y:-7.123,roe:16.405,roic:14.165,div:3.655,mom6:-23.82,mom1:-1.597},
+{ticker:"EXE",company:"EXEL Industries SA",country:"FR",mc:228.0,pe:14.032,ev_ebitda:4.785,p_ocf:3.219,ps:0.232,pb:0.489,ev_ebit:8.783,ev_rev:0.334,perf_1y:-11.842,roe:3.496,roic:3.044,div:1.786,mom6:-6.944,mom1:-11.141},
+{ticker:"WAVE",company:"Wavestone SA",country:"FR",mc:1104.1,pe:13.891,ev_ebitda:8.517,p_ocf:10.327,ps:1.162,pb:1.702,ev_ebit:10.002,ev_rev:1.178,perf_1y:-12.821,roe:12.866,roic:12.025,div:1.03,mom6:-6.356,mom1:-4.329},
+{ticker:"ALBKK",company:"Baikowski SA",country:"FR",mc:77.1,pe:12.346,ev_ebitda:10.136,p_ocf:9.866,ps:1.563,pb:1.608,ev_ebit:18.64,ev_rev:1.73,perf_1y:27.16,roe:13.645,roic:11.889,div:1.429,mom6:0.0,mom1:-2.83},
+{ticker:"SGO",company:"Compagnie de Saint-Gobain SA",country:"FR",mc:33844.1,pe:11.949,ev_ebitda:6.036,p_ocf:6.1,ps:0.751,pb:1.388,ev_ebit:8.999,ev_rev:0.959,perf_1y:-30.252,roe:11.607,roic:7.23,div:3.183,mom6:-23.532,mom1:-20.429},
+{ticker:"MMT",company:"Metropole Television SA",country:"FR",mc:1447.0,pe:11.761,ev_ebitda:4.847,p_ocf:10.42,ps:1.151,pb:1.116,ev_ebit:7.137,ev_rev:1.077,perf_1y:-18.625,roe:9.449,roic:9.065,div:10.908,mom6:-11.388,mom1:-0.873},
+{ticker:"ALPM",company:"Precia SA",country:"FR",mc:127.6,pe:11.581,ev_ebitda:4.588,p_ocf:5.709,ps:0.739,pb:1.308,ev_ebit:6.547,ev_rev:0.659,perf_1y:-10.662,roe:11.66,roic:10.077,div:2.331,mom6:-13.83,mom1:-10.0},
+{ticker:"RI",company:"Pernod Ricard SA",country:"FR",mc:16256.8,pe:11.562,ev_ebitda:9.524,p_ocf:9.697,ps:1.506,pb:1.052,ev_ebit:11.052,ev_rev:2.841,perf_1y:-32.511,roe:8.814,roic:5.086,div:7.264,mom6:-24.544,mom1:-24.94},
+{ticker:"OPM",company:"OPmobility",country:"FR",mc:2118.1,pe:11.497,ev_ebitda:3.851,p_ocf:2.855,ps:0.212,pb:1.003,ev_ebit:8.477,ev_rev:0.358,perf_1y:43.883,roe:8.858,roic:5.205,div:4.032,mom6:9.292,mom1:-9.689},
+{ticker:"TRI",company:"Trigano SA",country:"FR",mc:2718.8,pe:11.372,ev_ebitda:5.931,p_ocf:4.8,ps:0.769,pb:1.307,ev_ebit:7.265,ev_rev:0.667,perf_1y:20.388,roe:11.98,roic:10.896,div:2.553,mom6:0.813,mom1:-11.429},
+{ticker:"CDA",company:"Compagnie des Alpes SA",country:"FR",mc:1191.6,pe:11.172,ev_ebitda:6.273,p_ocf:3.415,ps:0.865,pb:1.09,ev_ebit:13.375,ev_rev:1.831,perf_1y:55.071,roe:10.073,roic:4.887,div:4.255,mom6:10.698,mom1:-15.152},
+{ticker:"LPE",company:"Laurent-Perrier SA",country:"FR",mc:505.8,pe:11.135,ev_ebitda:9.031,p_ocf:14.857,ps:1.697,pb:0.781,ev_ebit:9.994,ev_rev:2.499,perf_1y:-13.008,roe:7.218,roic:5.122,div:2.459,mom6:-2.283,mom1:-8.742},
+{ticker:"AKW",company:"AKWEL SA",country:"FR",mc:194.8,pe:11.104,ev_ebitda:0.715,p_ocf:2.321,ps:0.203,pb:0.326,ev_ebit:1.386,ev_rev:0.058,perf_1y:-0.165,roe:2.909,roic:2.862,div:4.087,mom6:-25.549,mom1:-4.372},
+{ticker:"ALLUX",company:"Installux S.A.",country:"FR",mc:77.0,pe:10.997,ev_ebitda:3.214,p_ocf:6.006,ps:0.49,pb:0.631,ev_ebit:6.224,ev_rev:0.363,perf_1y:-8.667,roe:5.859,roic:5.081,div:2.878,mom6:-13.836,mom1:-9.868},
+{ticker:"GPE",company:"Groupe Pizzorno Environnement SA",country:"FR",mc:233.0,pe:10.63,ev_ebitda:3.967,p_ocf:3.096,ps:0.857,pb:2.112,ev_ebit:8.361,ev_rev:0.937,perf_1y:-10.386,roe:21.019,roic:12.661,div:4.139,mom6:7.092,mom1:-1.629},
+{ticker:"CAP",company:"Capgemini SE",country:"FR",mc:16308.6,pe:10.539,ev_ebitda:6.992,p_ocf:6.815,ps:0.748,pb:1.402,ev_ebit:8.901,ev_rev:1.013,perf_1y:-35.257,roe:13.67,roic:8.729,div:3.534,mom6:-19.798,mom1:-5.437},
+{ticker:"PUB",company:"Publicis Groupe SA",country:"FR",mc:17190.7,pe:10.508,ev_ebitda:5.934,p_ocf:5.85,ps:1.004,pb:1.646,ev_ebit:7.717,ev_rev:1.08,perf_1y:-24.269,roe:15.372,roic:10.893,div:5.251,mom6:-11.691,mom1:-2.113},
+{ticker:"DBG",company:"Derichebourg SA",country:"FR",mc:1262.3,pe:10.327,ev_ebitda:6.082,p_ocf:6.313,ps:0.384,pb:1.122,ev_ebit:12.205,ev_rev:0.584,perf_1y:37.803,roe:11.344,roic:6.789,div:1.639,mom6:52.302,mom1:-14.913},
+{ticker:"ALDLT",company:"Delta Plus Group SA",country:"FR",mc:301.4,pe:10.161,ev_ebitda:7.551,p_ocf:8.965,ps:0.771,pb:1.18,ev_ebit:10.009,ev_rev:1.184,perf_1y:-18.798,roe:11.707,roic:8.405,div:2.494,mom6:-11.229,mom1:-15.694},
+{ticker:"VCT",company:"Vicat SA",country:"FR",mc:2711.3,pe:10.016,ev_ebitda:5.334,p_ocf:4.238,ps:0.729,pb:0.932,ev_ebit:8.992,ev_rev:1.078,perf_1y:18.596,roe:9.324,roic:6.263,div:3.257,mom6:2.291,mom1:-16.22},
+{ticker:"SDG",company:"Synergie SA",country:"FR",mc:630.8,pe:9.941,ev_ebitda:2.733,p_ocf:10.396,ps:0.188,pb:0.826,ev_ebit:3.719,ev_rev:0.111,perf_1y:-12.625,roe:8.633,roic:7.899,div:1.901,mom6:-17.035,mom1:-8.997},
+{ticker:"SK",company:"SEB SA",country:"FR",mc:2421.5,pe:9.88,ev_ebitda:5.939,p_ocf:11.811,ps:0.298,pb:0.744,ev_ebit:8.579,ev_rev:0.612,perf_1y:-50.894,roe:7.513,roic:4.794,div:6.375,mom6:-31.59,mom1:-14.353},
+{ticker:"TFI",company:"Television Francaise 1 SA",country:"FR",mc:1453.0,pe:9.543,ev_ebitda:1.582,p_ocf:3.189,ps:0.644,pb:0.704,ev_ebit:4.337,ev_rev:0.457,perf_1y:-23.106,roe:7.449,roic:7.152,div:8.715,mom6:-19.96,mom1:-2.741},
+{ticker:"SW",company:"Sodexo SA",country:"FR",mc:6231.9,pe:9.049,ev_ebitda:6.049,p_ocf:6.52,ps:0.261,pb:1.642,ev_ebit:8.759,ev_rev:0.399,perf_1y:-31.484,roe:18.367,roic:8.358,div:6.338,mom6:-22.974,mom1:-10.342},
+{ticker:"ALGIL",company:"Groupe Guillin SA",country:"FR",mc:391.9,pe:7.897,ev_ebitda:4.114,p_ocf:4.583,ps:0.455,pb:0.618,ev_ebit:6.793,ev_rev:0.523,perf_1y:-22.385,roe:8.033,roic:7.225,div:4.717,mom6:-26.562,mom1:-14.718},
+{ticker:"SOP",company:"Sopra Steria Group SA",country:"FR",mc:2326.3,pe:7.567,ev_ebitda:4.474,p_ocf:4.249,ps:0.388,pb:1.066,ev_ebit:6.229,ev_rev:0.542,perf_1y:-38.394,roe:14.78,roic:10.23,div:4.054,mom6:-30.044,mom1:-5.724},
+{ticker:"ABEO",company:"Abeo SA",country:"FR",mc:66.1,pe:7.567,ev_ebitda:6.284,p_ocf:3.436,ps:0.231,pb:0.543,ev_ebit:10.415,ev_rev:0.707,perf_1y:0.811,roe:7.198,roic:4.349,div:4.146,mom6:0.153,mom1:-5.227},
+{ticker:"ELIOR",company:"Elior Group SA",country:"FR",mc:605.9,pe:6.878,ev_ebitda:4.988,p_ocf:1.735,ps:0.1,pb:0.725,ev_ebit:9.695,ev_rev:0.279,perf_1y:-6.303,roe:10.932,roic:5.178,div:1.674,mom6:-5.062,mom1:-11.345},
+{ticker:"TEP",company:"Teleperformance SE",country:"FR",mc:2814.5,pe:5.822,ev_ebitda:3.542,p_ocf:1.928,ps:0.276,pb:0.667,ev_ebit:5.932,ev_rev:0.65,perf_1y:-50.948,roe:11.487,roic:6.21,div:8.934,mom6:-26.107,mom1:-8.303},
+{ticker:"BON",company:"Bonduelle SCA",country:"FR",mc:263.4,pe:5.555,ev_ebitda:6.062,p_ocf:3.793,ps:0.127,pb:0.397,ev_ebit:11.986,ev_rev:0.471,perf_1y:3.518,roe:3.601,roic:2.045,div:3.053,mom6:5.236,mom1:-18.898},
+{ticker:"BUR",company:"Burelle S.A.",country:"FR",mc:639.9,pe:5.288,ev_ebitda:3.192,p_ocf:0.85,ps:0.062,pb:0.373,ev_ebit:6.903,ev_rev:0.299,perf_1y:9.593,roe:7.196,roic:3.753,div:4.384,mom6:-1.823,mom1:-9.592},
+{ticker:"ALDEL",company:"Delfingen",country:"FR",mc:65.6,pe:4.887,ev_ebitda:4.011,p_ocf:1.87,ps:0.16,pb:0.469,ev_ebit:7.271,ev_rev:0.503,perf_1y:59.419,roe:9.649,roic:5.051,div:3.008,mom6:-21.219,mom1:-17.742},
+{ticker:"ALFRE",company:"Freelance.com",country:"FR",mc:114.7,pe:4.839,ev_ebitda:4.076,p_ocf:5.218,ps:0.107,pb:0.646,ev_ebit:4.959,ev_rev:0.126,perf_1y:-20.446,roe:14.154,roic:8.331,div:3.941,mom6:-6.957,mom1:-4.464},
+{ticker:"ALCAT",company:"Catana Group SA",country:"FR",mc:69.1,pe:4.771,ev_ebitda:3.76,p_ocf:9.886,ps:0.364,pb:0.636,ev_ebit:5.555,ev_rev:0.523,perf_1y:-49.667,roe:13.967,roic:9.79,div:8.0,mom6:-30.093,mom1:-18.231},
+{ticker:"PRM",company:"PRIM, S.A.",country:"ES",mc:215.3,pe:14.847,ev_ebitda:7.259,p_ocf:5.786,ps:0.874,pb:1.628,ev_ebit:11.551,ev_rev:0.916,perf_1y:22.388,roe:11.213,roic:10.71,div:2.864,mom6:-7.519,mom1:-3.906},
+{ticker:"GRF",company:"Grifols, S.A. Class A",country:"ES",mc:5366.5,pe:14.766,ev_ebitda:9.241,p_ocf:5.673,ps:0.784,pb:1.127,ev_ebit:12.494,ev_rev:2.076,perf_1y:-3.945,roe:7.208,roic:2.852,div:1.392,mom6:-25.081,mom1:-18.227},
+{ticker:"ANA",company:"Acciona SA",country:"ES",mc:11661.7,pe:14.478,ev_ebitda:6.844,p_ocf:5.415,ps:0.582,pb:2.472,ev_ebit:12.212,ev_rev:1.04,perf_1y:71.826,roe:16.873,roic:5.33,div:2.006,mom6:23.484,mom1:6.877},
+{ticker:"REP",company:"Repsol SA",country:"ES",mc:26344.6,pe:14.189,ev_ebitda:7.269,p_ocf:5.365,ps:0.487,pb:1.204,ev_ebit:13.847,ev_rev:0.68,perf_1y:84.404,roe:8.204,roic:5.241,div:3.365,mom6:46.929,mom1:26.694},
+{ticker:"VID",company:"Vidrala SA",country:"ES",mc:2735.2,pe:13.101,ev_ebitda:6.623,p_ocf:7.212,ps:1.879,pb:1.941,ev_ebit:9.526,ev_rev:1.969,perf_1y:-17.198,roe:15.377,roic:13.005,div:1.703,mom6:-12.138,mom1:-12.135},
+{ticker:"AZK",company:"Azkoyen, S.A.",country:"ES",mc:223.3,pe:12.892,ev_ebitda:5.911,p_ocf:8.792,ps:1.04,pb:1.675,ev_ebit:7.855,ev_rev:1.055,perf_1y:18.919,roe:13.341,roic:12.168,div:3.396,mom6:2.564,mom1:-6.977},
+{ticker:"HOME",company:"Neinor Homes SA",country:"ES",mc:1585.6,pe:12.807,ev_ebitda:32.548,p_ocf:7.611,ps:2.228,pb:1.371,ev_ebit:34.758,ev_rev:3.575,perf_1y:56.635,roe:12.205,roic:7.888,div:6.755,mom6:3.821,mom1:-13.482},
+{ticker:"MEL",company:"Melia Hotels International, S.A.",country:"ES",mc:2080.3,pe:12.235,ev_ebitda:8.464,p_ocf:4.413,ps:1.017,pb:2.466,ev_ebit:16.201,ev_rev:2.219,perf_1y:36.939,roe:21.233,roic:5.808,div:1.231,mom6:24.899,mom1:17.339},
+{ticker:"NTGY",company:"Naturgy Energy Group, S.A.",country:"ES",mc:24627.1,pe:11.792,ev_ebitda:7.544,p_ocf:5.085,ps:1.184,pb:2.543,ev_ebit:11.048,ev_rev:2.006,perf_1y:-1.608,roe:21.498,roic:8.446,div:5.686,mom6:3.331,mom1:-2.326},
+{ticker:"PSG",company:"Prosegur Compania de Seguridad SA",country:"ES",mc:1397.7,pe:11.674,ev_ebitda:5.361,p_ocf:3.693,ps:0.283,pb:1.933,ev_ebit:9.226,ev_rev:0.611,perf_1y:21.412,roe:15.579,roic:5.107,div:4.934,mom6:-8.995,mom1:-7.692},
+{ticker:"GEST",company:"Gestamp Automocion S.A.",country:"ES",mc:1720.6,pe:11.201,ev_ebitda:3.349,p_ocf:1.425,ps:0.153,pb:0.77,ev_ebit:8.012,ev_rev:0.386,perf_1y:10.876,roe:6.767,roic:3.093,div:2.44,mom6:-8.604,mom1:-4.645},
+{ticker:"ALQ",company:"Alquiber Quality SA",country:"ES",mc:64.7,pe:10.25,ev_ebitda:3.528,p_ocf:0.947,ps:0.421,pb:1.329,ev_ebit:15.242,ev_rev:2.007,perf_1y:4.31,roe:13.642,roic:3.884,div:2.008,mom6:-4.724,mom1:0.0},
+{ticker:"NEA",company:"Nicolas Correa, S.A.",country:"ES",mc:119.2,pe:9.935,ev_ebitda:6.288,p_ocf:11.549,ps:1.0,pb:1.29,ev_ebit:7.26,ev_rev:0.869,perf_1y:-11.442,roe:13.59,roic:12.931,div:2.47,mom6:-8.019,mom1:-5.743},
+{ticker:"CIE",company:"CIE Automotive, S.A.",country:"ES",mc:3232.7,pe:9.584,ev_ebitda:6.283,p_ocf:5.332,ps:0.818,pb:2.209,ev_ebit:8.511,ev_rev:1.184,perf_1y:14.871,roe:22.737,roic:11.164,div:2.79,mom6:-0.745,mom1:-12.336},
+{ticker:"ISUR",company:"Inmobiliaria del Sur, S.A.",country:"ES",mc:290.1,pe:7.259,ev_ebitda:12.721,p_ocf:6.908,ps:1.332,pb:1.036,ev_ebit:12.839,ev_rev:1.984,perf_1y:42.593,roe:18.277,roic:11.083,div:3.271,mom6:10.791,mom1:-14.444},
+{ticker:"AEDAS",company:"AEDAS Homes SA",country:"ES",mc:946.7,pe:6.836,ev_ebitda:7.625,p_ocf:2.709,ps:0.84,pb:1.159,ev_ebit:7.922,ev_rev:1.095,perf_1y:-14.022,roe:16.556,roic:13.878,div:9.086,mom6:9.647,mom1:-3.119},
+{ticker:"GE",company:"Gefran S.p.A.",country:"IT",mc:145.9,pe:14.678,ev_ebitda:5.117,p_ocf:6.004,ps:1.045,pb:1.447,ev_ebit:7.956,ev_rev:0.846,perf_1y:4.44,roe:9.973,roic:8.458,div:4.236,mom6:-14.459,mom1:-10.182},
+{ticker:"ILP",company:"ILPRA SpA",country:"IT",mc:64.9,pe:13.599,ev_ebitda:6.437,p_ocf:4.689,ps:0.823,pb:2.015,ev_ebit:9.968,ev_rev:1.164,perf_1y:23.832,roe:15.446,roic:9.665,div:2.222,mom6:-5.357,mom1:-4.505},
+{ticker:"TPS",company:"TPS S.p.A.",country:"IT",mc:54.4,pe:12.235,ev_ebitda:4.279,p_ocf:6.603,ps:0.941,pb:1.522,ev_ebit:6.08,ev_rev:0.749,perf_1y:-3.846,roe:12.296,roic:11.796,div:1.067,mom6:4.895,mom1:-5.063},
+{ticker:"B",company:"Bastogi SPA",country:"IT",mc:115.7,pe:11.899,ev_ebitda:13.204,p_ocf:9.374,ps:1.77,pb:2.956,ev_ebit:18.441,ev_rev:4.363,perf_1y:46.831,roe:28.103,roic:7.17,div:0.654,mom6:36.605,mom1:-3.738},
+{ticker:"CEM",company:"Cementir Holding N.V.",country:"IT",mc:2358.9,pe:11.377,ev_ebitda:5.328,p_ocf:6.969,ps:1.463,pb:1.267,ev_ebit:8.542,ev_rev:1.23,perf_1y:8.393,roe:11.563,roic:10.778,div:1.854,mom6:8.857,mom1:-6.158},
+{ticker:"DIS",company:"d'Amico International Shipping S.A.",country:"IT",mc:894.0,pe:11.294,ev_ebitda:6.763,p_ocf:5.9,ps:2.917,pb:1.344,ev_ebit:10.452,ev_rev:2.931,perf_1y:115.944,roe:11.447,roic:8.983,div:5.058,mom6:77.39,mom1:6.19},
+{ticker:"EGLA",company:"EuroGroup Laminations S.p.A",country:"IT",mc:167.5,pe:10.911,ev_ebitda:5.971,p_ocf:2.995,ps:0.201,pb:0.418,ev_ebit:14.401,ev_rev:0.667,perf_1y:-55.242,roe:3.731,roic:2.252,div:4.078,mom6:-67.615,mom1:-19.5},
+{ticker:"PQ",company:"Piquadro S.p.A",country:"IT",mc:127.9,pe:10.548,ev_ebitda:5.992,p_ocf:6.211,ps:0.657,pb:1.86,ev_ebit:12.745,ev_rev:0.972,perf_1y:24.623,roe:18.261,roic:12.892,div:5.657,mom6:2.479,mom1:-3.502},
+{ticker:"IRE",company:"Iren S.p.A.",country:"IT",mc:3097.3,pe:10.5,ev_ebitda:6.309,p_ocf:3.348,ps:0.48,pb:0.917,ev_ebit:14.48,ev_rev:1.207,perf_1y:4.386,roe:9.513,roic:3.897,div:5.315,mom6:-7.966,mom1:-13.643},
+{ticker:"ARIS",company:"Ariston Holding NV",country:"IT",mc:1248.0,pe:9.972,ev_ebitda:6.082,p_ocf:4.863,ps:0.496,pb:0.868,ev_ebit:11.504,ev_rev:0.652,perf_1y:-16.061,roe:9.001,roic:5.913,div:2.237,mom6:-8.509,mom1:-27.34},
+{ticker:"UD",company:"Unidata S.P.A.",country:"IT",mc:89.0,pe:9.587,ev_ebitda:4.698,p_ocf:3.926,ps:0.88,pb:1.043,ev_ebit:8.224,ev_rev:1.24,perf_1y:2.768,roe:11.972,roic:7.259,div:0.347,mom6:12.075,mom1:-8.615},
+{ticker:"MGS",company:"MAGIS S.p.A.",country:"IT",mc:59.4,pe:9.289,ev_ebitda:5.514,p_ocf:9.926,ps:0.8,pb:1.355,ev_ebit:8.229,ev_rev:0.728,perf_1y:-26.153,roe:13.371,roic:12.339,div:9.634,mom6:-18.86,mom1:-5.612},
+{ticker:"OMER",company:"OMER S.p.a.",country:"IT",mc:100.1,pe:8.995,ev_ebitda:4.645,p_ocf:12.308,ps:1.094,pb:1.485,ev_ebit:5.776,ev_rev:0.972,perf_1y:-19.31,roe:17.691,roic:17.154,div:2.011,mom6:-24.516,mom1:-8.115},
+{ticker:"BZU",company:"Buzzi Spa",country:"IT",mc:7945.9,pe:8.594,ev_ebitda:6.09,p_ocf:7.216,ps:1.806,pb:1.184,ev_ebit:8.163,ev_rev:1.646,perf_1y:-13.45,roe:14.446,roic:13.443,div:1.631,mom6:-6.84,mom1:-9.425},
+{ticker:"ANIM",company:"ANIMA Holding S.p.A.",country:"IT",mc:2094.6,pe:8.135,ev_ebitda:5.022,p_ocf:5.243,ps:1.512,pb:1.155,ev_ebit:5.674,ev_rev:1.559,perf_1y:-6.026,roe:15.128,roic:10.362,div:6.757,mom6:6.852,mom1:-3.959},
+{ticker:"IWB",company:"Italian Wine Brands S.p.A.",country:"IT",mc:177.7,pe:7.479,ev_ebitda:5.905,p_ocf:4.246,ps:0.443,pb:0.777,ev_ebit:7.348,ev_rev:0.678,perf_1y:-14.706,roe:10.703,roic:6.459,div:2.66,mom6:-16.222,mom1:-8.049},
+{ticker:"MFEA",company:"MFE-MediaForEurope NV Class A",country:"IT",mc:1869.3,pe:7.253,ev_ebitda:3.434,p_ocf:1.783,ps:0.511,pb:0.241,ev_ebit:8.332,ev_rev:0.865,perf_1y:-13.652,roe:5.783,roic:4.919,div:10.401,mom6:-21.467,mom1:-16.474},
+{ticker:"INDB",company:"Indel B S.p.A.",country:"IT",mc:108.2,pe:4.303,ev_ebitda:8.269,p_ocf:7.006,ps:0.505,pb:0.716,ev_ebit:13.32,ev_rev:0.694,perf_1y:-10.714,roe:17.815,roic:15.04,div:4.222,mom6:-5.779,mom1:-4.092},
+{ticker:"ELO",company:"Elopak ASA",country:"NO",mc:843.2,pe:13.411,ev_ebitda:6.774,p_ocf:5.49,ps:0.704,pb:2.412,ev_ebit:10.982,ev_rev:0.999,perf_1y:-4.799,roe:17.963,roic:8.579,div:4.202,mom6:-18.805,mom1:-30.755},
+{ticker:"MOWI",company:"Mowi ASA",country:"NO",mc:9789.6,pe:13.263,ev_ebitda:12.375,p_ocf:12.895,ps:1.704,pb:2.173,ev_ebit:21.787,ev_rev:2.273,perf_1y:3.883,roe:17.401,roic:10.473,div:2.882,mom6:1.394,mom1:-5.282},
+{ticker:"ODL",company:"Odfjell Drilling Ltd.",country:"NO",mc:2038.3,pe:13.171,ev_ebitda:7.084,p_ocf:5.639,ps:2.575,pb:1.626,ev_ebit:11.864,ev_rev:3.541,perf_1y:68.034,roe:11.76,roic:7.716,div:6.989,mom6:22.416,mom1:-6.559},
+{ticker:"GYL",company:"Gyldendal Norsk Forlag Asa",country:"NO",mc:86.3,pe:12.107,ev_ebitda:4.224,p_ocf:2.446,ps:0.35,pb:1.152,ev_ebit:13.894,ev_rev:0.582,perf_1y:15.789,roe:9.878,roic:6.518,div:0.814,mom6:2.804,mom1:-6.383},
+{ticker:"WSTEP",company:"Webstep AS",country:"NO",mc:42.3,pe:11.177,ev_ebitda:5.998,p_ocf:4.436,ps:0.548,pb:1.419,ev_ebit:7.831,ev_rev:0.525,perf_1y:-27.016,roe:11.819,roic:10.337,div:13.295,mom6:-18.468,mom1:1.117},
+{ticker:"ORK",company:"Orkla ASA",country:"NO",mc:10291.6,pe:10.844,ev_ebitda:13.503,p_ocf:13.276,ps:1.664,pb:2.567,ev_ebit:18.407,ev_rev:1.948,perf_1y:4.728,roe:13.312,roic:9.797,div:3.37,mom6:12.993,mom1:-9.831},
+{ticker:"HAFNI",company:"Hafnia Limited",country:"NO",mc:3229.6,pe:10.519,ev_ebitda:8.497,p_ocf:6.519,ps:1.577,pb:1.556,ev_ebit:13.784,ev_rev:1.963,perf_1y:57.792,roe:14.255,roic:10.388,div:5.53,mom6:17.165,mom1:5.959},
+{ticker:"BWLPG",company:"BW LPG Limited",country:"NO",mc:2158.9,pe:9.986,ev_ebitda:5.84,p_ocf:4.501,ps:0.675,pb:1.347,ev_ebit:10.937,ev_rev:0.895,perf_1y:35.106,roe:12.825,roic:8.949,div:8.351,mom6:7.557,mom1:-0.781},
+{ticker:"YAR",company:"Yara International ASA",country:"NO",mc:11944.8,pe:9.681,ev_ebitda:6.217,p_ocf:6.981,ps:0.839,pb:1.56,ev_ebit:10.535,ev_rev:1.052,perf_1y:61.455,roe:16.948,roic:11.732,div:0.928,mom6:40.076,mom1:11.579},
+{ticker:"RANA",company:"Rana Gruber ASA",country:"NO",mc:253.0,pe:9.631,ev_ebitda:5.604,p_ocf:5.174,ps:1.857,pb:2.817,ev_ebit:9.938,ev_rev:2.052,perf_1y:14.608,roe:30.781,roic:24.872,div:6.798,mom6:18.584,mom1:1.421},
+{ticker:"OTL",company:"Odfjell Technology Ltd.",country:"NO",mc:253.0,pe:9.056,ev_ebitda:5.013,p_ocf:5.093,ps:0.534,pb:2.298,ev_ebit:8.114,ev_rev:0.687,perf_1y:62.947,roe:24.851,roic:12.173,div:8.25,mom6:19.365,mom1:20.9},
+{ticker:"DOFG",company:"DOF Group ASA",country:"NO",mc:2892.5,pe:6.941,ev_ebitda:6.682,p_ocf:6.089,ps:1.713,pb:1.613,ev_ebit:9.671,ev_rev:2.339,perf_1y:42.642,roe:23.584,roic:13.222,div:7.352,mom6:33.066,mom1:8.585},
+{ticker:"BONHR",company:"Bonheur ASA",country:"NO",mc:847.4,pe:6.849,ev_ebitda:4.918,p_ocf:4.306,ps:0.863,pb:1.052,ev_ebit:8.679,ev_rev:1.245,perf_1y:-0.858,roe:16.714,roic:9.127,div:2.948,mom6:3.356,mom1:-15.847},
+{ticker:"BWO",company:"BW Offshore Limited",country:"NO",mc:802.3,pe:6.507,ev_ebitda:9.163,p_ocf:2.083,ps:1.758,pb:0.799,ev_ebit:15.173,ev_rev:4.349,perf_1y:76.37,roe:11.873,roic:5.007,div:6.774,mom6:36.243,mom1:-0.387},
+{ticker:"NAS",company:"Norwegian Air Shuttle ASA",country:"NO",mc:1287.6,pe:5.793,ev_ebitda:3.249,p_ocf:2.181,ps:0.412,pb:1.93,ev_ebit:7.312,ev_rev:0.665,perf_1y:29.011,roe:39.973,roic:12.516,div:6.417,mom6:-10.776,mom1:-17.876},
+{ticker:"ODF",company:"Odfjell SE Class A",country:"NO",mc:774.9,pe:5.145,ev_ebitda:4.21,p_ocf:2.548,ps:0.774,pb:0.961,ev_ebit:7.185,ev_rev:1.439,perf_1y:27.395,roe:18.857,roic:10.308,div:8.336,mom6:5.077,mom1:-0.889},
+{ticker:"MPCC",company:"MPC Container Ships ASA",country:"NO",mc:853.6,pe:3.977,ev_ebitda:3.494,p_ocf:3.317,ps:1.864,pb:1.047,ev_ebit:4.856,ev_rev:1.977,perf_1y:40.067,roe:26.531,roic:18.675,div:12.437,mom6:34.817,mom1:13.623},
+{ticker:"JIN",company:"Jinhui Shipping & Transportation Ltd.",country:"NO",mc:54.9,pe:2.052,ev_ebitda:2.479,p_ocf:0.646,ps:0.342,pb:0.163,ev_ebit:20.292,ev_rev:0.91,perf_1y:-1.049,roe:7.986,roic:6.342,div:5.303,mom6:-8.71,mom1:-1.736},
+{ticker:"ACKB",company:"Ackermans & van Haaren NV",country:"BE",mc:8544.5,pe:14.389,ev_ebitda:14.366,p_ocf:11.48,ps:1.436,pb:1.493,ev_ebit:24.71,ev_rev:3.088,perf_1y:26.544,roe:10.794,roic:7.177,div:1.022,mom6:19.508,mom1:-9.211},
+{ticker:"COLR",company:"Colruyt Group N.V.",country:"BE",mc:4038.8,pe:14.232,ev_ebitda:6.655,p_ocf:6.953,ps:0.384,pb:1.324,ev_ebit:16.609,ev_rev:0.432,perf_1y:-13.79,roe:9.737,roic:7.842,div:2.807,mom6:0.369,mom1:-2.738},
+{ticker:"COMB",company:"Compagnie du Bois Sauvage SA",country:"BE",mc:497.4,pe:13.145,ev_ebitda:4.55,p_ocf:8.119,ps:1.481,pb:0.948,ev_ebit:6.056,ev_rev:1.768,perf_1y:26.492,roe:7.344,roic:6.31,div:1.897,mom6:24.468,mom1:1.618},
+{ticker:"DECB",company:"Deceuninck nv",country:"BE",mc:275.6,pe:11.923,ev_ebitda:3.685,p_ocf:4.833,ps:0.389,pb:0.815,ev_ebit:6.567,ev_rev:0.506,perf_1y:-9.459,roe:7.14,roic:5.501,div:2.814,mom6:-0.741,mom1:-15.368},
+{ticker:"BAR",company:"Barco NV",country:"BE",mc:864.8,pe:11.389,ev_ebitda:5.66,p_ocf:7.606,ps:0.844,pb:1.107,ev_ebit:9.202,ev_rev:0.704,perf_1y:-22.191,roe:9.478,roic:8.985,div:3.705,mom6:-29.743,mom1:-13.294},
+{ticker:"PAY",company:"Payton Planar Magnetics Ltd.",country:"BE",mc:118.4,pe:11.325,ev_ebitda:5.615,p_ocf:9.87,ps:2.88,pb:1.67,ev_ebit:6.025,ev_rev:1.537,perf_1y:-12.903,roe:14.995,roic:14.995,div:3.342,mom6:7.143,mom1:3.846},
+{ticker:"MOUR",company:"Moury Construct SA",country:"BE",mc:274.6,pe:10.712,ev_ebitda:4.954,p_ocf:14.829,ps:1.335,pb:2.055,ev_ebit:5.316,ev_rev:0.747,perf_1y:42.353,roe:20.611,roic:20.336,div:1.268,mom6:23.051,mom1:0.0},
+{ticker:"CFEB",company:"Compagnie d'Entreprises CFE SA",country:"BE",mc:255.7,pe:7.433,ev_ebitda:28.985,p_ocf:2.178,ps:0.242,pb:0.942,ev_ebit:null,ev_rev:0.199,perf_1y:35.083,roe:13.108,roic:8.047,div:2.772,mom6:16.962,mom1:5.5},
+{ticker:"PROX",company:"Proximus SA",country:"BE",mc:2244.3,pe:5.642,ev_ebitda:3.36,p_ocf:1.42,ps:0.36,pb:0.59,ev_ebit:8.171,ev_rev:1.211,perf_1y:5.105,roe:10.735,roic:4.307,div:6.039,mom6:-5.02,mom1:-15.357},
+{ticker:"BC8",company:"Bechtle AG",country:"DE",mc:3437.3,pe:14.996,ev_ebitda:8.353,p_ocf:12.236,ps:0.539,pb:1.677,ev_ebit:13.022,ev_rev:0.579,perf_1y:-30.09,roe:11.573,roic:8.967,div:2.566,mom6:-32.654,mom1:-18.696},
+{ticker:"MZX",company:"Masterflex SE",country:"DE",mc:131.3,pe:14.794,ev_ebitda:7.197,p_ocf:9.726,ps:1.31,pb:1.941,ev_ebit:10.136,ev_rev:1.348,perf_1y:32.02,roe:13.745,roic:10.518,div:1.978,mom6:3.077,mom1:-3.249},
+{ticker:"SFQ",company:"SAF-HOLLAND SE",country:"DE",mc:753.5,pe:14.779,ev_ebitda:5.417,p_ocf:5.403,ps:0.451,pb:1.519,ev_ebit:9.01,ev_rev:0.712,perf_1y:0.115,roe:10.035,roic:4.447,div:5.12,mom6:17.568,mom1:-11.043},
+{ticker:"M12",company:"M1 Kliniken AG",country:"DE",mc:260.4,pe:14.58,ev_ebitda:7.758,p_ocf:7.455,ps:0.732,pb:2.192,ev_ebit:9.096,ev_rev:0.775,perf_1y:-2.466,roe:15.605,roic:14.74,div:3.587,mom6:0.282,mom1:-11.553},
+{ticker:"DHL",company:"Deutsche Post AG",country:"DE",mc:48672.7,pe:14.546,ev_ebitda:6.366,p_ocf:6.152,ps:0.632,pb:2.224,ev_ebit:11.496,ev_rev:0.838,perf_1y:3.462,roe:15.215,roic:8.147,div:4.188,mom6:12.591,mom1:-9.455},
+{ticker:"BIJ",company:"Bijou Brigitte modische Accessoires AG",country:"DE",mc:334.9,pe:13.912,ev_ebitda:4.495,p_ocf:4.542,ps:0.971,pb:1.585,ev_ebit:10.738,ev_rev:1.192,perf_1y:14.021,roe:10.681,roic:7.583,div:8.046,mom6:6.683,mom1:-5.895},
+{ticker:"1SXP",company:"SCHOTT Pharma AG & Co. KGaA",country:"DE",mc:2033.3,pe:13.489,ev_ebitda:7.774,p_ocf:12.792,ps:2.04,pb:2.186,ev_ebit:11.402,ev_rev:2.018,perf_1y:-43.404,roe:17.132,roic:17.132,div:1.333,mom6:-34.963,mom1:-10.498},
+{ticker:"GFT",company:"GFT Technologies SE",country:"DE",mc:431.7,pe:12.994,ev_ebitda:7.452,p_ocf:9.69,ps:0.481,pb:1.594,ev_ebit:10.485,ev_rev:0.583,perf_1y:-27.304,roe:12.315,roic:9.359,div:3.049,mom6:-7.317,mom1:16.273},
+{ticker:"TGHN",company:"Logwin AG",country:"DE",mc:787.7,pe:12.954,ev_ebitda:4.026,p_ocf:8.726,ps:0.6,pb:1.995,ev_ebit:5.577,ev_rev:0.34,perf_1y:20.339,roe:15.806,roic:14.472,div:4.672,mom6:11.811,mom1:0.709},
+{ticker:"RWE",company:"RWE AG",country:"DE",mc:40658.4,pe:12.806,ev_ebitda:18.38,p_ocf:8.207,ps:2.363,pb:1.183,ev_ebit:635.819,ev_rev:2.922,perf_1y:69.42,roe:9.498,roic:6.695,div:2.012,mom6:45.555,mom1:6.772},
+{ticker:"FPE",company:"FUCHS SE",country:"DE",mc:4261.4,pe:12.729,ev_ebitda:7.747,p_ocf:9.583,ps:1.096,pb:1.969,ev_ebit:9.522,ev_rev:1.154,perf_1y:-24.651,roe:15.802,roic:15.377,div:3.906,mom6:-8.87,mom1:-4.968},
+{ticker:"HEN",company:"Henkel AG & Co. KGaA",country:"DE",mc:26231.5,pe:12.607,ev_ebitda:7.276,p_ocf:10.036,ps:1.251,pb:1.233,ev_ebit:8.908,ev_rev:1.313,perf_1y:-8.821,roe:9.639,roic:8.695,div:3.253,mom6:-4.366,mom1:-19.192},
+{ticker:"SWA",company:"Schloss Wachenheim AG",country:"DE",mc:110.1,pe:12.241,ev_ebitda:6.03,p_ocf:3.777,ps:0.245,pb:0.533,ev_ebit:10.019,ev_rev:0.631,perf_1y:0.0,roe:4.39,roic:3.638,div:4.317,mom6:-4.73,mom1:-1.399},
+{ticker:"KRN",company:"Krones AG",country:"DE",mc:3633.2,pe:12.164,ev_ebitda:5.367,p_ocf:7.913,ps:0.65,pb:1.707,ev_ebit:7.752,ev_rev:0.571,perf_1y:-13.839,roe:14.75,roic:14.061,div:2.261,mom6:-5.392,mom1:-15.351},
+{ticker:"KSB",company:"KSB SE & Co. KGaA",country:"DE",mc:1617.8,pe:11.746,ev_ebitda:4.851,p_ocf:8.549,ps:0.577,pb:1.426,ev_ebit:6.907,ev_rev:0.518,perf_1y:39.366,roe:12.506,roic:12.096,div:2.804,mom6:30.373,mom1:6.198},
+{ticker:"UZU",company:"Uzin Utz SE",country:"DE",mc:355.6,pe:11.469,ev_ebitda:6.3,p_ocf:7.664,ps:0.748,pb:1.261,ev_ebit:9.477,ev_rev:0.843,perf_1y:16.807,roe:11.433,roic:10.094,div:2.695,mom6:-7.333,mom1:-14.198},
+{ticker:"FME",company:"Fresenius Medical Care AG",country:"DE",mc:11198.4,pe:11.444,ev_ebitda:6.339,p_ocf:4.11,ps:0.567,pb:0.809,ev_ebit:11.328,ev_rev:1.082,perf_1y:-17.243,roe:7.016,roic:4.231,div:3.736,mom6:-13.121,mom1:-8.335},
+{ticker:"CEK",company:"CeoTronics AG",country:"DE",mc:89.4,pe:11.41,ev_ebitda:6.038,p_ocf:3.52,ps:1.339,pb:2.911,ev_ebit:6.888,ev_rev:1.265,perf_1y:17.838,roe:28.519,roic:20.012,div:1.786,mom6:-13.834,mom1:-21.014},
+{ticker:"FNTN",company:"freenet AG",country:"DE",mc:3084.3,pe:11.285,ev_ebitda:6.806,p_ocf:7.462,ps:1.246,pb:1.977,ev_ebit:9.101,ev_rev:1.535,perf_1y:-26.387,roe:17.809,roic:14.075,div:7.132,mom6:-4.832,mom1:-16.72},
+{ticker:"HP3A",company:"Ringmetall SE",country:"DE",mc:78.5,pe:10.931,ev_ebitda:6.401,p_ocf:6.469,ps:0.439,pb:0.926,ev_ebit:11.295,ev_rev:0.763,perf_1y:-21.023,roe:8.578,roic:6.192,div:3.704,mom6:-5.442,mom1:-4.138},
+{ticker:"NDA",company:"Aurubis AG",country:"DE",mc:6417.9,pe:10.608,ev_ebitda:6.375,p_ocf:13.071,ps:0.338,pb:1.204,ev_ebit:8.246,ev_rev:0.351,perf_1y:61.376,roe:11.897,roic:11.118,div:1.088,mom6:48.058,mom1:-10.452},
+{ticker:"AAG",company:"Aumann AG",country:"DE",mc:143.5,pe:10.372,ev_ebitda:1.03,p_ocf:9.341,ps:0.687,pb:0.856,ev_ebit:1.347,ev_rev:0.118,perf_1y:-17.678,roe:8.445,roic:8.282,div:1.76,mom6:-13.863,mom1:-12.017},
+{ticker:"AJ91",company:"DocCheck AG",country:"DE",mc:58.9,pe:10.029,ev_ebitda:4.025,p_ocf:7.84,ps:1.026,pb:1.52,ev_ebit:5.193,ev_rev:0.778,perf_1y:13.861,roe:15.567,roic:14.039,div:6.466,mom6:-10.156,mom1:-10.853},
+{ticker:"BOSS",company:"HUGO BOSS AG",country:"DE",mc:2484.6,pe:9.959,ev_ebitda:4.443,p_ocf:3.855,ps:0.588,pb:1.616,ev_ebit:8.557,ev_rev:0.783,perf_1y:2.28,roe:16.832,roic:10.261,div:3.889,mom6:-9.543,mom1:-1.235},
+{ticker:"INH",company:"INDUS Holding AG",country:"DE",mc:688.9,pe:9.67,ev_ebitda:4.577,p_ocf:4.426,ps:0.405,pb:0.911,ev_ebit:6.995,ev_rev:0.711,perf_1y:0.53,roe:9.675,roic:5.284,div:4.494,mom6:27.865,mom1:-5.324},
+{ticker:"MBG",company:"Mercedes-Benz Group AG",country:"DE",mc:49714.7,pe:9.665,ev_ebitda:9.585,p_ocf:2.756,ps:0.378,pb:0.53,ev_ebit:20.238,ev_rev:0.995,perf_1y:-12.81,roe:5.531,roic:3.195,div:8.328,mom6:-3.113,mom1:-11.389},
+{ticker:"PWO",company:"PWO AG",country:"DE",mc:75.6,pe:9.449,ev_ebitda:3.338,p_ocf:1.795,ps:0.143,pb:0.456,ev_ebit:6.717,ev_rev:0.315,perf_1y:-20.0,roe:4.877,roic:3.414,div:7.231,mom6:-13.669,mom1:-7.692},
+{ticker:"HBH",company:"HORNBACH Holding AG & Co. KGaA",country:"DE",mc:1241.3,pe:9.308,ev_ebitda:5.156,p_ocf:3.649,ps:0.199,pb:0.589,ev_ebit:10.447,ev_rev:0.399,perf_1y:-10.722,roe:6.506,roic:4.065,div:3.089,mom6:-23.353,mom1:-7.701},
+{ticker:"DRW8",company:"Draegerwerk AG & Co. KGaA",country:"DE",mc:1475.6,pe:9.242,ev_ebitda:4.413,p_ocf:5.412,ps:0.388,pb:0.794,ev_ebit:7.074,ev_rev:0.459,perf_1y:44.565,roe:8.825,roic:7.456,div:2.863,mom6:42.629,mom1:-1.575},
+{ticker:"KTN",company:"Kontron AG",country:"DE",mc:1230.5,pe:8.591,ev_ebitda:6.236,p_ocf:8.437,ps:0.727,pb:1.611,ev_ebit:9.079,ev_rev:0.921,perf_1y:-22.804,roe:20.257,roic:13.621,div:3.151,mom6:-29.142,mom1:-14.469},
+{ticker:"EDL",company:"Edel SE & Co. KGAA",country:"DE",mc:108.2,pe:8.386,ev_ebitda:6.271,p_ocf:6.072,ps:0.413,pb:1.793,ev_ebit:10.544,ev_rev:0.655,perf_1y:19.748,roe:22.59,roic:12.703,div:5.941,mom6:35.071,mom1:6.542},
+{ticker:"NTG",company:"Nabaltec AG",country:"DE",mc:90.2,pe:7.278,ev_ebitda:3.398,p_ocf:6.536,ps:0.445,pb:0.575,ev_ebit:5.418,ev_rev:0.525,perf_1y:-33.117,roe:8.075,roic:5.091,div:2.829,mom6:-25.899,mom1:-13.445},
+{ticker:"MED",company:"MEDICLIN Aktiengesellschaft",country:"DE",mc:171.9,pe:6.746,ev_ebitda:4.25,p_ocf:1.722,ps:0.208,pb:0.691,ev_ebit:8.874,ev_rev:0.626,perf_1y:22.759,roe:10.812,roic:4.015,div:1.105,mom6:19.463,mom1:-7.772},
+{ticker:"VOW",company:"Volkswagen AG",country:"DE",mc:43918.6,pe:6.64,ev_ebitda:5.296,p_ocf:2.953,ps:0.139,pb:0.255,ev_ebit:13.831,ev_rev:0.837,perf_1y:-15.329,roe:3.898,roic:2.07,div:7.127,mom6:-4.18,mom1:-12.221},
+{ticker:"LHA",company:"Deutsche Lufthansa AG",country:"DE",mc:8819.5,pe:6.581,ev_ebitda:7.536,p_ocf:2.358,ps:0.228,pb:0.757,ev_ebit:null,ev_rev:0.385,perf_1y:0.478,roe:11.487,roic:5.703,div:4.079,mom6:-3.93,mom1:-18.845},
+{ticker:"BMW",company:"Bayerische Motoren Werke AG",country:"DE",mc:46175.8,pe:6.532,ev_ebitda:7.271,p_ocf:5.922,ps:0.356,pb:0.494,ev_ebit:13.598,ev_rev:1.018,perf_1y:-7.703,roe:7.759,roic:4.604,div:5.528,mom6:-9.166,mom1:-11.22},
+{ticker:"VIH1",company:"VIB Vermoegen AG",country:"DE",mc:249.2,pe:6.277,ev_ebitda:17.407,p_ocf:3.389,ps:2.007,pb:0.275,ev_ebit:null,ev_rev:10.798,perf_1y:-25.581,roe:4.481,roic:2.23,div:0.531,mom6:-18.222,mom1:-20.86},
+{ticker:"TUI1",company:"TUI AG",country:"DE",mc:3363.3,pe:5.425,ev_ebitda:4.518,p_ocf:1.853,ps:0.143,pb:1.974,ev_ebit:8.97,ev_rev:0.329,perf_1y:-8.951,roe:46.162,roic:11.816,div:1.509,mom6:-14.217,mom1:-15.189},
+{ticker:"VNA",company:"Vonovia SE",country:"DE",mc:17847.4,pe:4.742,ev_ebitda:24.359,p_ocf:10.778,ps:2.522,pb:0.65,ev_ebit:30.451,ev_rev:8.863,perf_1y:-10.714,roe:14.192,roic:5.685,div:5.798,mom6:-17.927,mom1:-23.92},
+{ticker:"B7E",company:"Blue Cap AG",country:"DE",mc:78.1,pe:3.819,ev_ebitda:3.849,p_ocf:4.793,ps:0.424,pb:0.773,ev_ebit:9.569,ev_rev:0.514,perf_1y:-3.889,roe:8.395,roic:5.578,div:3.736,mom6:-16.019,mom1:-4.42},
+{ticker:"ERAG",company:"Ernst Russ AG",country:"DE",mc:239.9,pe:3.265,ev_ebitda:2.286,p_ocf:2.653,ps:1.52,pb:0.966,ev_ebit:3.825,ev_rev:1.054,perf_1y:23.129,roe:34.247,roic:34.115,div:2.809,mom6:9.697,mom1:-2.426},
+{ticker:"CRBN",company:"Corbion NV",country:"NL",mc:1071.1,pe:14.654,ev_ebitda:7.281,p_ocf:6.814,ps:0.892,pb:1.444,ev_ebit:12.644,ev_rev:1.162,perf_1y:-10.729,roe:9.874,roic:6.892,div:3.439,mom6:11.125,mom1:-10.884},
+{ticker:"HYDRA",company:"Hydratec Industries NV",country:"NL",mc:278.2,pe:13.872,ev_ebitda:7.353,p_ocf:8.618,ps:1.079,pb:2.372,ev_ebit:10.001,ev_rev:1.021,perf_1y:31.064,roe:21.732,roic:19.827,div:2.804,mom6:22.034,mom1:10.204},
+{ticker:"RAND",company:"Randstad NV",country:"NL",mc:4031.5,pe:13.866,ev_ebitda:6.011,p_ocf:4.92,ps:0.18,pb:1.086,ev_ebit:9.182,ev_rev:0.253,perf_1y:-42.993,roe:7.353,roic:5.123,div:7.071,mom6:-36.032,mom1:-11.982},
+{ticker:"AKZA",company:"Akzo Nobel N.V.",country:"NL",mc:8394.7,pe:13.317,ev_ebitda:15.625,p_ocf:8.606,ps:0.839,pb:1.802,ev_ebit:32.122,ev_rev:1.132,perf_1y:-17.873,roe:13.777,roic:7.675,div:4.034,mom6:-18.893,mom1:-18.078},
+{ticker:"MT",company:"ArcelorMittal SA",country:"NL",mc:32363.3,pe:11.692,ev_ebitda:9.795,p_ocf:8.033,ps:0.623,pb:0.714,ev_ebit:26.04,ev_rev:0.752,perf_1y:38.896,roe:6.078,roic:5.118,div:1.111,mom6:30.279,mom1:-19.919},
+{ticker:"ARCAD",company:"Arcadis NV",country:"NL",mc:2318.6,pe:11.678,ev_ebitda:6.895,p_ocf:6.266,ps:0.499,pb:2.266,ev_ebit:9.701,ev_rev:0.641,perf_1y:-48.389,roe:18.334,roic:10.305,div:3.668,mom6:-42.549,mom1:-6.643},
+{ticker:"FFARM",company:"ForFarmers NV",country:"NL",mc:566.8,pe:11.281,ev_ebitda:4.342,p_ocf:3.765,ps:0.181,pb:1.571,ev_ebit:7.091,ev_rev:0.226,perf_1y:42.354,roe:14.544,roic:11.39,div:3.15,mom6:46.879,mom1:-4.431},
+{ticker:"BAMNB",company:"Koninklijke BAM Groep NV",country:"NL",mc:2297.0,pe:10.546,ev_ebitda:4.887,p_ocf:6.376,ps:0.328,pb:2.267,ev_ebit:8.564,ev_rev:0.255,perf_1y:59.989,roe:22.766,roic:18.047,div:2.96,mom6:14.541,mom1:-7.327},
+{ticker:"HAL",company:"HAL Trust",country:"NL",mc:15246.6,pe:8.847,ev_ebitda:5.858,p_ocf:5.918,ps:1.199,pb:1.012,ev_ebit:10.327,ev_rev:1.417,perf_1y:36.19,roe:11.852,roic:9.493,div:1.718,mom6:27.3,mom1:0.351},
+{ticker:"LIGHT",company:"Signify NV",country:"NL",mc:2198.4,pe:8.773,ev_ebitda:4.69,p_ocf:4.188,ps:0.387,pb:0.817,ev_ebit:7.304,ev_rev:0.564,perf_1y:-18.616,roe:8.706,roic:6.301,div:8.543,mom6:-25.024,mom1:-11.44},
+{ticker:"SBMO",company:"SBM Offshore NV",country:"NL",mc:5796.8,pe:7.52,ev_ebitda:8.882,p_ocf:8.322,ps:1.188,pb:1.558,ev_ebit:9.212,ev_rev:2.762,perf_1y:67.076,roe:22.339,roic:7.972,div:2.484,mom6:52.107,mom1:11.104}
+];
+
+const seen=new Set();
+const STOCKS=DATA.filter(s=>{if(seen.has(s.ticker))return false;seen.add(s.ticker);return true;});
+
+let sCol='score',sAsc=false,selC=new Set(['ALL']),selTk=null;
+let viewMode='screener'; // 'screener' | 'watchlist'
+
+// Watchlist & comments persistence via localStorage
+function loadWL(){try{return new Set(JSON.parse(localStorage.getItem('wl_tickers')||'[]'));}catch{return new Set();}}
+function saveWL(set){localStorage.setItem('wl_tickers',JSON.stringify([...set]));}
+function loadComments(){try{return JSON.parse(localStorage.getItem('wl_comments')||'{}');}catch{return {};}}
+function saveComments(obj){localStorage.setItem('wl_comments',JSON.stringify(obj));}
+
+let watchlist=loadWL();
+let comments=loadComments();
+
+function toggleWatchlist(tk){
+  if(!tk)return;
+  if(watchlist.has(tk))watchlist.delete(tk);else watchlist.add(tk);
+  saveWL(watchlist);
+  updateWLBadge();
+  render();
+  if(selTk===tk)updateDetWLBtn(tk);
+}
+
+function updateWLBadge(){
+  const b=document.getElementById('wl-count-badge');
+  const n=watchlist.size;
+  b.textContent=n;
+  b.classList.toggle('hidden',n===0);
+}
+
+function updateDetWLBtn(tk){
+  const btn=document.getElementById('d-wl-btn');
+  if(!btn)return;
+  const on=watchlist.has(tk);
+  btn.textContent=on?'★ Retirer de la watchlist':'☆ Ajouter à la watchlist';
+  btn.style.color=on?'#e8a800':'';
+  btn.style.borderColor=on?'#e8a800':'';
+  btn.style.background=on?'#fffbe8':'';
+}
+
+function saveComment(){
+  if(!selTk)return;
+  const ta=document.getElementById('d-comment-ta');
+  const val=ta.value.trim();
+  if(val)comments[selTk]=val;else delete comments[selTk];
+  saveComments(comments);
+  const s=document.getElementById('d-comment-saved');
+  s.style.display='inline';
+  setTimeout(()=>{s.style.display='none';},1500);
+  render();
+}
+
+function toggleView(){
+  viewMode=viewMode==='screener'?'watchlist':'screener';
+  const btn=document.getElementById('wl-topbtn');
+  const noteCol=document.getElementById('th-note');
+  if(viewMode==='watchlist'){
+    btn.style.color='#b08000';
+    btn.style.borderColor='#e8c800';
+    btn.style.background='#fffbe8';
+    noteCol.style.display='';
+  }else{
+    btn.style.color='';btn.style.borderColor='';btn.style.background='';
+    noteCol.style.display='none';
+  }
+  render();
+}
+
+function getW(){return{valo:+document.getElementById('w-valo').value,qual:+document.getElementById('w-qual').value,div:+document.getElementById('w-div').value,perf:0,mom6:+document.getElementById('w-mom6').value,mom1:+document.getElementById('w-mom1').value};}
+function getF(){return{pe:+document.getElementById('f-pe').value,ev:+document.getElementById('f-ev').value,pb:+document.getElementById('f-pb').value,ps:+document.getElementById('f-ps').value,ocf:+document.getElementById('f-ocf').value,roe:+document.getElementById('f-roe').value,roic:+document.getElementById('f-roic').value,div:+document.getElementById('f-div').value,mc:+document.getElementById('f-mc').value,mom6:+document.getElementById('f-mom6').value,mom1:+document.getElementById('f-mom1').value};}
+
+function computeRanks(arr){
+  const ms=['pe','ev_ebitda','p_ocf','ps','pb'],out={};
+  ms.forEach(m=>{
+    const s=arr.map((x,i)=>({i,v:x[m]})).filter(x=>x.v!=null&&x.v>0).sort((a,b)=>a.v-b.v);
+    out[m]={};s.forEach((x,r)=>{out[m][x.i]=s.length>1?1-r/(s.length-1):1;});
+  });
+  // Qualité: plus haut = mieux
+  ['roe','roic','div'].forEach(m=>{
+    const s=arr.map((x,i)=>({i,v:x[m]})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v);
+    out[m]={};s.forEach((x,r)=>{out[m][x.i]=s.length>1?1-r/(s.length-1):1;});
+  });
+  // Perf: plus haut = mieux
+  const pfs=arr.map((x,i)=>({i,v:x.perf_1y})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v);
+  out['perf']={};pfs.forEach((x,r)=>{out['perf'][x.i]=pfs.length>1?1-r/(pfs.length-1):1;});
+  // Momentum 6m et 1m : plus haut = mieux
+  ['mom6','mom1'].forEach(m=>{
+    const s=arr.map((x,i)=>({i,v:x[m]})).filter(x=>x.v!=null).sort((a,b)=>b.v-a.v);
+    out[m]={};s.forEach((x,r)=>{out[m][x.i]=s.length>1?1-r/(s.length-1):1;});
+  });
+  return out;
+}
+
+function filterD(){
+  const f=getF();
+  return STOCKS.filter(s=>{
+    if(s.mc<f.mc)return false;
+    if(s.pe!=null&&s.pe>f.pe)return false;
+    if(f.ev<30&&s.ev_ebitda!=null&&s.ev_ebitda>f.ev)return false;
+    if(f.pb<5&&s.pb!=null&&s.pb>f.pb)return false;
+    if(f.ps<3&&s.ps!=null&&s.ps>f.ps)return false;
+    if(f.ocf<15&&s.p_ocf!=null&&s.p_ocf>f.ocf)return false;
+    if(f.roe>0&&(s.roe==null||s.roe<f.roe))return false;
+    if(f.roic>0&&(s.roic==null||s.roic<f.roic))return false;
+    if(f.div>0&&(s.div==null||s.div<f.div))return false;
+    if(f.mom6>-50&&(s.mom6==null||s.mom6<f.mom6))return false;
+    if(f.mom1>-30&&(s.mom1==null||s.mom1<f.mom1))return false;
+    if(!selC.has('ALL')&&!selC.has(s.country))return false;
+    return true;
+  });
+}
+
+function scoreAll(arr,w){
+  const rk=computeRanks(arr);
+  return arr.map((s,i)=>{
+    const valoMs=['pe','ev_ebitda','p_ocf','ps','pb'];
+    const vS=valoMs.map(m=>rk[m]?.[i]??0);
+    const valoSc=vS.reduce((a,b)=>a+b,0)/valoMs.length;
+    const qualSc=((rk['roe']?.[i]??0)+(rk['roic']?.[i]??0))/2;
+    const divSc=rk['div']?.[i]??0;
+    const perfSc=rk['perf']?.[i]??0;
+    const mom6Sc=rk['mom6']?.[i]??0;
+    const mom1Sc=rk['mom1']?.[i]??0;
+    const momSc=(mom6Sc*(w.mom6||0)+mom1Sc*(w.mom1||0))/Math.max(w.mom6+w.mom1,1)||0;
+    const tot=w.valo+w.qual+w.div+w.perf+(w.mom6||0)+(w.mom1||0)||1;
+    const sc=(valoSc*w.valo+qualSc*w.qual+divSc*w.div+perfSc*w.perf+mom6Sc*(w.mom6||0)+mom1Sc*(w.mom1||0))/tot;
+    return{...s,sc,valoSc,qualSc,divSc,perfSc,momSc,mom6Sc,mom1Sc,rk,fi:i};
+  });
+}
+
+function vc(v,t1,t2){if(v==null)return'';return v<=t1?'vg':v<=t2?'vo':'vr';}
+function vcH(v,t1,t2){if(v==null)return'';return v>=t1?'vg':v>=t2?'vo':'vr';}
+function fv(v,d,u){return v!=null?v.toFixed(d)+u:'<span style="color:var(--tx3)">—</span>';}
+function fmc(v){return v>=1000?(v/1000).toFixed(1)+'B':Math.round(v)+'M';}
+function rkC(r){return r>=.66?'rp rpg':r>=.33?'rp rpo':'rp rpr';}
+function rkCq(r){return r>=.66?'rp rpp':r>=.33?'rp rpo':'rp rpr';}
+function rkCd(r){return r>=.66?'rp rpg':r>=.33?'rp rpt':'rp rpo';}
+function rkCm(r){return r>=.66?'rp rpm':r>=.33?'rp rpo':'rp rpr';}
+function vcM(v){if(v==null)return'';return v>5?'vg':v>0?'vo':'vr';}
+function fvM(v){if(v==null)return '<span style="color:var(--tx3)">—</span>';const c=v>0?'pp':v<0?'pn':'';return `<span class="${c}">${v>0?'+':''}${v.toFixed(1)}%</span>`;}
+
+function render(){
+  const w=getW();
+  let arr=filterD();
+  if(viewMode==='watchlist') arr=STOCKS.filter(s=>watchlist.has(s.ticker));
+  const scored=scoreAll(arr,w);
+  const sfns={score:s=>s.sc,pe:s=>s.pe??999,ev:s=>s.ev_ebitda??999,roe:s=>-(s.roe??-999),roic:s=>-(s.roic??-999),div:s=>-(s.div??-999),pb:s=>s.pb??999,mc:s=>s.mc,mom6:s=>-(s.mom6??-999),mom1:s=>-(s.mom1??-999)};  // already correct
+  const fn=sfns[sCol]||sfns.score;
+  scored.sort((a,b)=>sAsc?fn(a)-fn(b):fn(b)-fn(a));
+  if(viewMode==='screener'){
+    document.getElementById('ctag').textContent=scored.length+' action'+(scored.length!==1?'s':'');
+  } else {
+    document.getElementById('ctag').textContent=watchlist.size+' watchlist';
+  }
+  const tb=document.getElementById('tb'),nr=document.getElementById('nr');
+  if(viewMode==='watchlist'&&watchlist.size===0){
+    tb.innerHTML='';
+    nr.innerHTML='<div style="font-size:28px;margin-bottom:10px">☆</div>Votre watchlist est vide.<br><span style="font-size:12px">Cliquez sur ★ dans la liste ou dans le panneau détail pour ajouter des valeurs.</span>';
+    nr.style.display='block';return;
+  }
+  if(!scored.length){tb.innerHTML='';nr.innerHTML='Aucune action ne correspond aux critères.';nr.style.display='block';return;}
+  nr.style.display='none';
+  const mx=Math.max(...scored.map(s=>s.sc),0.001);
+  tb.innerHTML=scored.map((s,i)=>{
+    const p=Math.round(s.sc/mx*100),cl=p>=66?'a':p>=33?'b':'c';
+    const pf=s.perf_1y,pt=pf==null?'—':(pf>0?'+':'')+(pf/100).toFixed(1)+'%',pc=pf==null?'':pf>0?'pp':'pn';
+    const wlOn=watchlist.has(s.ticker);
+    const note=comments[s.ticker]||'';
+    return`<tr onclick="showD('${s.ticker}')" ${s.ticker===selTk?'class="sel"':''}>
+      <td style="color:var(--tx3);font-size:11px">${i+1}</td>
+      <td onclick="event.stopPropagation();toggleWatchlist('${s.ticker}')"><button class="wl-btn${wlOn?' wl-on':''}" title="${wlOn?'Retirer':'Ajouter à la watchlist'}">${wlOn?'★':'☆'}</button></td>
+      <td><div class="sbd"><span class="sn s${cl==='a'?'a':cl==='b'?'b4':'c2'}">${p}%</span><div class="str"><div class="sf sf${cl}" style="width:${p}%"></div></div></div></td>
+      <td style="font-weight:700;color:var(--acc)">${s.ticker}</td>
+      <td class="nt" title="${s.company}">${s.company}</td>
+      <td><span class="cp">${s.country}</span></td>
+      <td>${fmc(s.mc)}</td>
+      <td class="${vc(s.pe,7,12)}">${fv(s.pe,1,'x')}</td>
+      <td class="${vc(s.ev_ebitda,5,10)}">${fv(s.ev_ebitda,1,'x')}</td>
+      <td class="${vc(s.pb,1,2)}">${fv(s.pb,2,'x')}</td>
+      <td class="${vc(s.ps,0.5,1.5)}">${fv(s.ps,2,'x')}</td>
+      <td class="${vcH(s.roe,15,8)}" style="border-left:2px solid var(--pur-bg)">${fv(s.roe,1,'%')}</td>
+      <td class="${vcH(s.roic,10,5)}">${fv(s.roic,1,'%')}</td>
+      <td class="${vcH(s.div,5,2.5)}" style="border-left:2px solid var(--grn-bg)">${fv(s.div,1,'%')}</td>
+      <td class="${pc}" style="font-size:11px">${pt}</td>
+      <td class="${vcM(s.mom6)}" style="border-left:2px solid #fff0e0;font-size:11px">${fvM(s.mom6)}</td>
+      <td class="${vcM(s.mom1)}" style="font-size:11px">${fvM(s.mom1)}</td>
+      <td><span class="${rkC(s.valoSc)}">${Math.round(s.valoSc*100)}%</span></td>
+      <td><span class="${rkCq(s.qualSc)}">${Math.round(s.qualSc*100)}%</span></td>
+      <td><span class="${rkCd(s.divSc)}">${Math.round(s.divSc*100)}%</span></td>
+      <td><span class="${rkCm(s.momSc)}">${Math.round((s.momSc||0)*100)}%</span></td>
+      <td class="wl-note-cell" style="${viewMode==='watchlist'?'':'display:none'}" title="${note}">${note||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function showD(tk){
+  selTk=tk;
+  const w=getW(),arr=filterD(),scored=scoreAll(arr,w);
+  const s=scored.find(x=>x.ticker===tk);if(!s)return;
+  const mx=Math.max(...scored.map(x=>x.sc),0.001),p=Math.round(s.sc/mx*100);
+  const n=arr.length;
+  document.getElementById('d-tk').textContent=s.ticker;
+  document.getElementById('d-nm').textContent=s.company;
+  document.getElementById('d-sb').textContent=s.country+' · Cap. '+fmc(s.mc)+' €';
+  document.getElementById('d-pct').textContent=p+'%';
+  const rkt=(m,rev=false)=>{const r=s.rk[m]?.[s.fi];if(r==null)return'';const pos=Math.round((1-r)*(n-1)+1);return`<span class="drk">#${pos}/${n}</span>`;};
+  document.getElementById('d-bars').innerHTML=
+    `<div class="dbr-r"><span class="dbl" style="color:var(--acc)">VALO</span><div class="dbt"><div class="dbf" style="width:${Math.round(s.valoSc*100)}%;background:var(--acc)"></div></div><span class="dbn">${Math.round(s.valoSc*100)}%</span></div>`+
+    `<div class="dbr-r"><span class="dbl" style="color:var(--pur)">QUAL</span><div class="dbt"><div class="dbf" style="width:${Math.round(s.qualSc*100)}%;background:var(--pur)"></div></div><span class="dbn">${Math.round(s.qualSc*100)}%</span></div>`+
+    `<div class="dbr-r"><span class="dbl" style="color:var(--grn)">DIV</span><div class="dbt"><div class="dbf" style="width:${Math.round(s.divSc*100)}%;background:var(--grn)"></div></div><span class="dbn">${Math.round(s.divSc*100)}%</span></div>`+
+    `<div class="dbr-r"><span class="dbl" style="color:var(--amb)">PERF</span><div class="dbt"><div class="dbf" style="width:${Math.round(s.perfSc*100)}%;background:var(--amb)"></div></div><span class="dbn">${Math.round(s.perfSc*100)}%</span></div>`;
+  document.getElementById('d-valo').innerHTML=[['PER',s.pe,'pe',1,'x'],['EV/EBITDA',s.ev_ebitda,'ev_ebitda',1,'x'],['P/OCF',s.p_ocf,'p_ocf',1,'x'],['P/S',s.ps,'ps',2,'x'],['P/B',s.pb,'pb',2,'x']].map(([l,v,m,d,u])=>`<div class="dr"><span class="dl">${l}</span><div class="dv">${v!=null?v.toFixed(d)+u:'—'}${rkt(m)}</div></div>`).join('');
+  document.getElementById('d-qual').innerHTML=[['ROE','roe',s.roe],['ROIC','roic',s.roic]].map(([l,m,v])=>`<div class="dr"><span class="dl">${l}</span><div class="dv">${v!=null?v.toFixed(1)+'%':'—'}${rkt(m)}</div></div>`).join('');
+  document.getElementById('d-div').innerHTML=`<div class="dr"><span class="dl">Dividende yield</span><div class="dv">${s.div!=null?s.div.toFixed(1)+'%':'—'}${rkt('div')}</div></div>`;
+  const pf=s.perf_1y,pt=pf==null?'—':(pf>0?'+':'')+(pf/100).toFixed(1)+'%',pc=pf==null?'':pf>0?'color:var(--grn)':'color:var(--red)';
+  const m6=s.mom6,m6t=m6==null?'—':(m6>0?'+':'')+m6.toFixed(1)+'%',m6c=m6==null?'':m6>0?'color:var(--grn)':'color:var(--red)';
+  const m1=s.mom1,m1t=m1==null?'—':(m1>0?'+':'')+m1.toFixed(1)+'%',m1c=m1==null?'':m1>0?'color:var(--grn)':'color:var(--red)';
+  document.getElementById('d-misc').innerHTML=`<div class="dr"><span class="dl">Perf. 1 an</span><div class="dv" style="${pc}">${pt}</div></div><div class="dr"><span class="dl" style="color:var(--ora)">Momentum 6 mois</span><div class="dv" style="${m6c}">${m6t}${rkt('mom6')}</div></div><div class="dr"><span class="dl" style="color:var(--ora)">Momentum 1 mois</span><div class="dv" style="${m1c}">${m1t}${rkt('mom1')}</div></div><div class="dr"><span class="dl">EV/EBIT</span><div class="dv">${s.ev_ebit!=null?s.ev_ebit.toFixed(2)+'x':'—'}</div></div><div class="dr"><span class="dl">EV/Rev.</span><div class="dv">${s.ev_rev!=null?s.ev_rev.toFixed(2)+'x':'—'}</div></div>`;
+  document.getElementById('det').classList.add('open');
+  document.querySelectorAll('#tb tr').forEach(tr=>{const t=tr.onclick?.toString().match(/'([^']+)'/)?.[1];tr.className=t===tk?'sel':'';});
+  // Watchlist button & comment
+  updateDetWLBtn(tk);
+  const ta=document.getElementById('d-comment-ta');
+  if(ta) ta.value=comments[tk]||'';
+  document.getElementById('d-comment-saved').style.display='none';
+}
+
+function closeD(){document.getElementById('det').classList.remove('open');selTk=null;}
+
+function doReset(){
+  ['f-pe','f-roe','f-roic','f-div'].forEach(id=>document.getElementById(id).value=document.getElementById(id).min);
+  document.getElementById('f-pe').value=15;document.getElementById('f-ev').value=30;document.getElementById('f-pb').value=5;
+  document.getElementById('f-ps').value=3;document.getElementById('f-ocf').value=15;document.getElementById('f-mc').value=50;
+  document.getElementById('w-valo').value=3;document.getElementById('w-qual').value=2;document.getElementById('w-div').value=1;
+  document.getElementById('w-mom6').value=1;document.getElementById('w-mom1').value=0;
+  document.getElementById('f-mom6').value=-50;document.getElementById('f-mom1').value=-30;
+  selC=new Set(['ALL']);document.querySelectorAll('.tg').forEach(t=>t.classList.toggle('on',t.dataset.v==='ALL'));
+  updateL();render();
+}
+
+function updateL(){
+  const pe=+document.getElementById('f-pe').value;document.getElementById('f-pe-v').textContent=`≤ ${pe}x`;
+  const ev=+document.getElementById('f-ev').value;const evE=document.getElementById('f-ev-v');evE.textContent=ev>=30?'—':`≤ ${ev}x`;evE.className=ev<30?'fv on':'fv';
+  const pb=+document.getElementById('f-pb').value;const pbE=document.getElementById('f-pb-v');pbE.textContent=pb>=5?'—':`≤ ${pb.toFixed(1)}x`;pbE.className=pb<5?'fv on':'fv';
+  const ps=+document.getElementById('f-ps').value;const psE=document.getElementById('f-ps-v');psE.textContent=ps>=3?'—':`≤ ${ps.toFixed(1)}x`;psE.className=ps<3?'fv on':'fv';
+  const ocf=+document.getElementById('f-ocf').value;const oE=document.getElementById('f-ocf-v');oE.textContent=ocf>=15?'—':`≤ ${ocf}x`;oE.className=ocf<15?'fv on':'fv';
+  const roe=+document.getElementById('f-roe').value;const rE=document.getElementById('f-roe-v');rE.textContent=roe===0?'—':`≥ ${roe}%`;rE.className=roe>0?'fv on':'fv';
+  const roic=+document.getElementById('f-roic').value;const riE=document.getElementById('f-roic-v');riE.textContent=roic===0?'—':`≥ ${roic}%`;riE.className=roic>0?'fv on':'fv';
+  const div=+document.getElementById('f-div').value;const dE=document.getElementById('f-div-v');dE.textContent=div===0?'—':`≥ ${div.toFixed(1)}%`;dE.className=div>0?'fv on':'fv';
+  const mc=+document.getElementById('f-mc').value;document.getElementById('f-mc-v').textContent=mc>=1000?(mc/1000).toFixed(1)+'B':mc+'M';
+  const m6f=+document.getElementById('f-mom6').value;const m6E=document.getElementById('f-mom6-v');m6E.textContent=m6f<=-50?'—':`≥ ${m6f}%`;m6E.className=m6f>-50?'fv on':'fv';
+  const m1f=+document.getElementById('f-mom1').value;const m1E=document.getElementById('f-mom1-v');m1E.textContent=m1f<=-30?'—':`≥ ${m1f}%`;m1E.className=m1f>-30?'fv on':'fv';
+  ['w-valo','w-qual','w-div','w-mom6','w-mom1'].forEach(id=>document.getElementById(id+'-v').textContent='×'+document.getElementById(id).value);
+}
+
+['f-pe','f-ev','f-pb','f-ps','f-ocf','f-roe','f-roic','f-div','f-mc','f-mom6','f-mom1'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{updateL();render();}));
+['w-valo','w-qual','w-div','w-mom6','w-mom1'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{updateL();render();}));
+document.querySelectorAll('.tg').forEach(btn=>btn.addEventListener('click',()=>{
+  const v=btn.dataset.v;if(v==='ALL'){selC=new Set(['ALL']);}else{selC.delete('ALL');selC.has(v)?selC.delete(v):selC.add(v);if(!selC.size)selC.add('ALL');}
+  document.querySelectorAll('.tg').forEach(t=>t.classList.toggle('on',selC.has(t.dataset.v)));render();
+}));
+document.querySelectorAll('.sb2').forEach(btn=>btn.addEventListener('click',()=>{
+  const s=btn.dataset.s;if(sCol===s)sAsc=!sAsc;else{sCol=s;sAsc=['pe','ev','pb','ps','mc'].includes(s);}
+  document.querySelectorAll('.sb2').forEach(b=>b.classList.remove('on'));btn.classList.add('on');render();
+}));
+['sc','mc','pe','ev','pb','ps','roe','roic','div','pf','mom6','mom1'].forEach(c=>{
+  const el=document.getElementById('th-'+c);
+  if(!el)return;
+  el.addEventListener('click',()=>{
+    const map={sc:'score',mc:'mc',pe:'pe',ev:'ev',pb:'pb',ps:'ps',roe:'roe',roic:'roic',div:'div',pf:'perf',mom6:'mom6',mom1:'mom1'};
+    const s=map[c];if(sCol===s)sAsc=!sAsc;else{sCol=s;sAsc=['pe','ev','pb','ps','mc'].includes(s);}
+    document.querySelectorAll('th').forEach(t=>t.classList.remove('thon'));el.classList.add('thon');render();
+  });
+});
+updateL();render();
+updateWLBadge();
+</script>
+</body>
+</html>
