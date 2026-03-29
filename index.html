@@ -144,6 +144,8 @@ tr{cursor:pointer}tr:hover td{background:var(--acc-bg)}tr.sel td{background:#dce
     <button class="rst" id="wl-topbtn" onclick="toggleView()" style="display:flex;align-items:center;gap:5px;font-weight:600;color:var(--tx2)">
       ★ Watchlist <span class="wl-badge hidden" id="wl-count-badge">0</span>
     </button>
+    <button class="rst" onclick="exportWL()" title="Exporter la watchlist en JSON">💾 Exporter</button>
+    <label class="rst" style="cursor:pointer;display:flex;align-items:center;gap:4px;margin:0" title="Importer une watchlist JSON">📂 Importer<input type="file" accept=".json" onchange="importWL(event)" style="display:none"></label>
     <button class="rst" onclick="doReset()">↺ Réinitialiser</button>
   </div>
 </div>
@@ -740,6 +742,33 @@ document.querySelectorAll('.sb2').forEach(btn=>btn.addEventListener('click',()=>
     document.querySelectorAll('th').forEach(t=>t.classList.remove('thon'));el.classList.add('thon');render();
   });
 });
+function exportWL(){
+  const data={tickers:[...watchlist],comments:comments,date:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='watchlist_screener.json';a.click();URL.revokeObjectURL(a.href);
+}
+
+function importWL(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(data.tickers&&Array.isArray(data.tickers)){
+        watchlist=new Set(data.tickers);saveWL(watchlist);
+      }
+      if(data.comments&&typeof data.comments==='object'){
+        comments=data.comments;saveComments(comments);
+      }
+      updateWLBadge();render();
+      alert('✓ Watchlist importée : '+watchlist.size+' action(s)');
+    }catch(err){alert('Erreur lors de l\'import. Vérifiez que le fichier est valide.');}
+  };
+  reader.readAsText(file);
+  event.target.value=''; // reset input
+}
+
 updateL();render();
 updateWLBadge();
 </script>
