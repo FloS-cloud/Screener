@@ -21,8 +21,12 @@ body{font-family:Arial,sans-serif;font-size:13px;background:var(--bg);color:var(
 .app{display:flex;flex:1;overflow:hidden}
 
 /* SIDEBAR */
-.sb{width:272px;min-width:272px;background:var(--sur);border-right:1px solid var(--bdr);overflow-y:auto;display:flex;flex-direction:column}
+.sb{width:272px;min-width:272px;background:var(--sur);border-right:1px solid var(--bdr);overflow-y:auto;display:flex;flex-direction:column;transition:width .2s,min-width .2s}
+.sb.collapsed{width:0;min-width:0;overflow:hidden;border-right:none}
 .sb::-webkit-scrollbar{width:4px}.sb::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
+/* Sidebar toggle button */
+.sb-toggle{position:relative;flex-shrink:0;width:18px;background:var(--sur2);border-right:1px solid var(--bdr);border-left:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;z-index:5;user-select:none}
+.sb-toggle:hover{background:var(--acc-bg)}.sb-toggle-arrow{font-size:10px;color:var(--tx3);transition:transform .2s}.sb-toggle:hover .sb-toggle-arrow{color:var(--acc)}
 .sec{padding:11px 15px;border-bottom:1px solid var(--bdr)}
 .stl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:9px}
 
@@ -132,6 +136,24 @@ tr{cursor:pointer}tr:hover td{background:var(--acc-bg)}tr.sel td{background:#dce
 /* Watchlist panel in table */
 .wl-empty{padding:40px 20px;text-align:center;color:var(--tx3);font-size:13px;line-height:1.6}
 .wl-note-cell{max-width:200px;overflow:hidden;text-overflow:ellipsis;font-style:italic;color:var(--tx3);font-size:11px}
+
+/* Comment tabs */
+.d-ctabs{display:flex;gap:0;border-bottom:1px solid var(--bdr);flex-shrink:0;margin-bottom:10px}
+.d-ctab-btn{font-size:11px;font-weight:600;padding:5px 12px;border:none;background:none;cursor:pointer;color:var(--tx3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:.1s}
+.d-ctab-btn.active{color:var(--acc);border-bottom-color:var(--acc)}
+.d-ctab-pane{display:none}.d-ctab-pane.active{display:block}
+
+/* Fundamental rating */
+.fond-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bdr)}.fond-row:last-child{border-bottom:none}
+.fond-label{font-size:11px;color:var(--tx2);flex:1}
+.fond-stars{display:flex;gap:3px}
+.fond-star{font-size:18px;cursor:pointer;color:var(--bdr2);transition:.15s;line-height:1;user-select:none}
+.fond-star:hover,.fond-star.on{color:#e8a800}
+.fond-star:hover~.fond-star{color:var(--bdr2)!important}
+.fond-val{font-size:10px;font-weight:700;min-width:52px;text-align:right;color:var(--tx3)}
+.fond-save-row{display:flex;align-items:center;margin-top:7px}
+.fond-saved{font-size:10px;color:var(--grn);margin-left:7px;display:none}
+.fond-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid #e8a800;background:#fffbe8;color:#b08000;margin-left:6px}
 </style>
 </head>
 <body>
@@ -151,7 +173,7 @@ tr{cursor:pointer}tr:hover td{background:var(--acc-bg)}tr.sel td{background:#dce
 </div>
 
 <div class="app">
-<div class="sb">
+<div class="sb" id="sidebar">
 
   <!-- PONDÉRATION -->
   <div class="sec">
@@ -233,6 +255,10 @@ tr{cursor:pointer}tr:hover td{background:var(--acc-bg)}tr.sel td{background:#dce
 
 </div>
 
+<div class="sb-toggle" id="sb-toggle" onclick="toggleSidebar()" title="Masquer/afficher le panneau">
+  <span class="sb-toggle-arrow" id="sb-arrow">◀</span>
+</div>
+
 <!-- TABLE -->
 <div class="main">
   <div class="tw">
@@ -295,12 +321,37 @@ tr{cursor:pointer}tr:hover td{background:var(--acc-bg)}tr.sel td{background:#dce
     <div class="dst"><span style="color:var(--tx3)">Performance &amp; multiples</span></div>
     <div id="d-misc"></div>
   </div>
-  <div class="d-comment">
-    <div class="dst"><span style="color:var(--tx3)">💬 Commentaire</span></div>
-    <textarea class="d-comment-ta" id="d-comment-ta" placeholder="Ajouter une note personnelle…"></textarea>
-    <div style="display:flex;align-items:center;margin-top:5px">
-      <button class="d-comment-save" onclick="saveComment()">Enregistrer</button>
-      <span class="d-comment-saved" id="d-comment-saved">✓ Enregistré</span>
+  <div class="d-comment" id="d-comment-zone">
+    <div class="dst"><span style="color:var(--tx3)">📋 Notes &amp; Analyse</span></div>
+    <div class="d-ctabs">
+      <button class="d-ctab-btn active" id="d-ctab-comment" onclick="switchCommentTab('comment')">💬 Commentaire</button>
+      <button class="d-ctab-btn" id="d-ctab-fond" onclick="switchCommentTab('fond')" style="display:none">🔍 Fondamental<span class="fond-badge" id="d-fond-badge" style="display:none"></span></button>
+    </div>
+    <!-- Onglet Commentaire -->
+    <div class="d-ctab-pane active" id="d-pane-comment">
+      <textarea class="d-comment-ta" id="d-comment-ta" placeholder="Ajouter une note personnelle…"></textarea>
+      <div style="display:flex;align-items:center;margin-top:5px">
+        <button class="d-comment-save" onclick="saveComment()">Enregistrer</button>
+        <span class="d-comment-saved" id="d-comment-saved">✓ Enregistré</span>
+      </div>
+    </div>
+    <!-- Onglet Fondamental -->
+    <div class="d-ctab-pane" id="d-pane-fond">
+      <div class="fond-row">
+        <span class="fond-label">Qualité fondamentale</span>
+        <div class="fond-stars" id="fond-stars">
+          <span class="fond-star" data-v="1" onclick="setFond(1)">★</span>
+          <span class="fond-star" data-v="2" onclick="setFond(2)">★</span>
+          <span class="fond-star" data-v="3" onclick="setFond(3)">★</span>
+          <span class="fond-star" data-v="4" onclick="setFond(4)">★</span>
+          <span class="fond-star" data-v="5" onclick="setFond(5)">★</span>
+        </div>
+        <span class="fond-val" id="fond-label-val">—</span>
+      </div>
+      <div class="fond-save-row">
+        <button class="d-comment-save" onclick="saveFond()">Enregistrer</button>
+        <span class="fond-saved" id="fond-saved">✓ Enregistré</span>
+      </div>
     </div>
   </div>
   <div style="padding:11px 15px">
@@ -479,8 +530,12 @@ function saveWL(set){localStorage.setItem('wl_tickers',JSON.stringify([...set]))
 function loadComments(){try{return JSON.parse(localStorage.getItem('wl_comments')||'{}');}catch{return {};}}
 function saveComments(obj){localStorage.setItem('wl_comments',JSON.stringify(obj));}
 
+function loadFond(){try{return JSON.parse(localStorage.getItem('wl_fond')||'{}');}catch{return {};}}
+function saveFondData(obj){localStorage.setItem('wl_fond',JSON.stringify(obj));}
+
 let watchlist=loadWL();
 let comments=loadComments();
+let fondData=loadFond();
 
 function toggleWatchlist(tk){
   if(!tk)return;
@@ -488,7 +543,14 @@ function toggleWatchlist(tk){
   saveWL(watchlist);
   updateWLBadge();
   render();
-  if(selTk===tk)updateDetWLBtn(tk);
+  if(selTk===tk){
+    updateDetWLBtn(tk);
+    // refresh fond tab visibility
+    const inWL=watchlist.has(tk);
+    const fondTab=document.getElementById('d-ctab-fond');
+    if(fondTab) fondTab.style.display=inWL?'':'none';
+    if(!inWL) switchCommentTab('comment');
+  }
 }
 
 function updateWLBadge(){
@@ -518,6 +580,54 @@ function saveComment(){
   s.style.display='inline';
   setTimeout(()=>{s.style.display='none';},1500);
   render();
+}
+
+// Fondamental rating
+let fondPending=0; // valeur en cours avant enregistrement
+
+const FOND_LABELS=['','Éviter','Faible','Correct','Bon','Excellent'];
+const FOND_COLORS=['','var(--red)','var(--amb)','var(--tx2)','var(--grn)','var(--grn)'];
+
+function setFond(v){
+  fondPending=v;
+  renderFondStars(v);
+}
+
+function renderFondStars(v){
+  document.querySelectorAll('#fond-stars .fond-star').forEach(s=>{
+    const sv=+s.dataset.v;
+    s.classList.toggle('on',sv<=v);
+  });
+  const lbl=document.getElementById('fond-label-val');
+  lbl.textContent=v?FOND_LABELS[v]:'—';
+  lbl.style.color=v?FOND_COLORS[v]:'var(--tx3)';
+}
+
+function saveFond(){
+  if(!selTk)return;
+  if(fondPending>0)fondData[selTk]=fondPending;else delete fondData[selTk];
+  saveFondData(fondData);
+  // update badge
+  updateFondBadge(selTk);
+  const s=document.getElementById('fond-saved');
+  s.style.display='inline';
+  setTimeout(()=>{s.style.display='none';},1500);
+  render();
+}
+
+function updateFondBadge(tk){
+  const badge=document.getElementById('d-fond-badge');
+  if(!badge)return;
+  const v=fondData[tk];
+  if(v){badge.textContent='★'.repeat(v);badge.style.display='inline';}
+  else{badge.style.display='none';}
+}
+
+function switchCommentTab(tab){
+  ['comment','fond'].forEach(t=>{
+    document.getElementById('d-ctab-'+t).classList.toggle('active',t===tab);
+    document.getElementById('d-pane-'+t).classList.toggle('active',t===tab);
+  });
 }
 
 function toggleView(){
@@ -693,6 +803,17 @@ function showD(tk){
   const ta=document.getElementById('d-comment-ta');
   if(ta) ta.value=comments[tk]||'';
   document.getElementById('d-comment-saved').style.display='none';
+  // Fondamental tab: visible only if in watchlist
+  const inWL=watchlist.has(tk);
+  const fondTab=document.getElementById('d-ctab-fond');
+  if(fondTab) fondTab.style.display=inWL?'':'none';
+  // If not in WL and fondamental tab is active, switch back to comment
+  if(!inWL){switchCommentTab('comment');}
+  // Load fondamental value
+  fondPending=fondData[tk]||0;
+  renderFondStars(fondPending);
+  updateFondBadge(tk);
+  document.getElementById('fond-saved').style.display='none';
 }
 
 function closeD(){document.getElementById('det').classList.remove('open');selTk=null;}
@@ -743,7 +864,7 @@ document.querySelectorAll('.sb2').forEach(btn=>btn.addEventListener('click',()=>
   });
 });
 function exportWL(){
-  const data={tickers:[...watchlist],comments:comments,date:new Date().toISOString()};
+  const data={tickers:[...watchlist],comments:comments,fondData:fondData,date:new Date().toISOString()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download='watchlist_screener.json';a.click();URL.revokeObjectURL(a.href);
@@ -761,12 +882,22 @@ function importWL(event){
       if(data.comments&&typeof data.comments==='object'){
         comments=data.comments;saveComments(comments);
       }
+      if(data.fondData&&typeof data.fondData==='object'){
+        fondData=data.fondData;saveFondData(fondData);
+      }
       updateWLBadge();render();
       alert('✓ Watchlist importée : '+watchlist.size+' action(s)');
     }catch(err){alert('Erreur lors de l\'import. Vérifiez que le fichier est valide.');}
   };
   reader.readAsText(file);
   event.target.value=''; // reset input
+}
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const arrow=document.getElementById('sb-arrow');
+  sb.classList.toggle('collapsed');
+  arrow.textContent=sb.classList.contains('collapsed')?'▶':'◀';
 }
 
 updateL();render();
